@@ -12,4 +12,4 @@ export const createCollection = <T = DocumentData>(collectionName: string) => {
     return collection(firestore, collectionName) as CollectionReference<T>;
 }
 
-export const drinksCol = createCollection<Admin>("admin");
+export const adminCol = createCollection<Admin>("admin");
