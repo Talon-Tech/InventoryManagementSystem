@@ -12,11 +12,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AddDonationComponent } from './components/add-donation/add-donation.component';
+import { LoginComponent } from './components/login/login.component';
+import { LogoutComponent } from './components/logout/logout.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AddDonationComponent
+    AddDonationComponent,
+    LoginComponent,
+    LogoutComponent
   ],
   exports: [
     MatButtonModule,
