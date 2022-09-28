@@ -1,4 +1,4 @@
-import Donation from "./donation.model";
+import Donation from "../models/donation.model";
 
 let periodProgram: Donation[] = [];
 
