@@ -18,7 +18,14 @@ export class LoginComponent implements OnInit {
   password?: number;
 
   clicked(){
-    alert('dn');
+    loginArray.push({
+      id: "1",
+      name: "Matt",
+      password: "1234"
+    });
+
+    console.log(loginArray);
+
   }
 
 }

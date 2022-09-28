@@ -1,5 +1,5 @@
-import {Admin} from "../models/admin.model";
+import Admin from "../models/admin.model";
 
 let loginArray: Admin[] = [];
 
-export default Admin;
+export default loginArray;
