@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import loginArray from 'src/app/repositories/userLogins.repository';
+
 
 @Component({
   selector: 'app-login',
@@ -15,4 +17,9 @@ export class LoginComponent implements OnInit {
   username?: string;
   password?: number;
 
+  clicked(){
+    alert('dn');
+  }
+
 }
+
