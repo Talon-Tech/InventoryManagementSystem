@@ -15,13 +15,12 @@ export class LoginComponent implements OnInit {
   }
 
   username?: string;
-  password?: number;
+  password?: string;
 
   clicked(){
     loginArray.push({
-      id: "1",
-      name: "Matt",
-      password: "1234"
+      name: this.username!,
+      password: this.password!
     });
 
     console.log(loginArray);
