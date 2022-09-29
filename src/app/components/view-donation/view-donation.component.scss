@@ -1,3 +1,22 @@
 table {
-    width: 100%;
-  }
+  width: 100%;
+  padding: 5%;
+}
+
+.mat-form-field {
+  margin:20px;
+  color: black;
+}
+
+input {
+  padding-left: 10px;
+}
+
+.mat-form-field-appearance-legacy .mat-form-field-label {
+  color: rgba(38, 38, 38, 0.7);
+}
+
+.mat-focused .mat-form-field-label {
+  color: green;
+  font-size: 20px;
+} 
