@@ -16,15 +16,16 @@ const ELEMENT_DATA: Donations[] = [
   {itemName: 'French Baguette Loaf', donor: 'Panera', program: "FOOD_PANTRY", donationDate: '9/30/2022'},
   {itemName: 'Plain Bagel', donor: 'Panera', program: "FOOD_PANTRY", donationDate: '9/30/2022'},
   {itemName: 'Classic Sourdough Loaf', donor: 'Panera', program: 'FOOD_PANTRY', donationDate: '9/30/2022'},
-  {itemName: 'AZO Complete Feminine Balance', donor: 'Target', program: "'PERIOD_PROGRAM", donationDate: '9/20/2022'},
+  {itemName: 'AZO Complete Feminine Balance', donor: 'Target', program: "PERIOD_PROGRAM", donationDate: '9/20/2022'},
   {itemName: 'Gala Apples', donor: 'Publix', program: 'FOOD_PANTRY', donationDate: '9/30/2022'},
 ];
 
 @Component({
-  selector: 'view-donation.component',
+  selector: 'app-view-donation',
   styleUrls: ['view-donation.component.scss'],
   templateUrl: 'view-donation.component.html',
 })
+
 
 export class Example {
   displayedColumns: string[] = ['itemName', 'donor', 'program', 'donationDate'];
