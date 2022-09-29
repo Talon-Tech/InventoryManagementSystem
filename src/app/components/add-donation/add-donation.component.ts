@@ -40,7 +40,7 @@ export class AddDonationComponent implements OnInit {
       return false;
     }
 
-    if (this.program === "PERIOD_PROGRAM") {
+    if (this.program === "Period Program") {
       try {
         for(let i = 0; i < this.quantity!; i++) {
           
@@ -63,7 +63,7 @@ export class AddDonationComponent implements OnInit {
       }
     }
 
-    if (this.program === "FOOD_PANTRY") {
+    if (this.program === "Food Pantry") {
       try {
         for(let i = 0; i < this.quantity!; i++) {
           
@@ -84,7 +84,7 @@ export class AddDonationComponent implements OnInit {
       }
     }
 
-    if (this.program === 'COLLEGE_READINESS') {
+    if (this.program === "College Readiness") {
       try {
         for(let i = 0; i < this.quantity!; i++) {
           
@@ -105,7 +105,7 @@ export class AddDonationComponent implements OnInit {
       }
     }
 
-    if (this.program === 'DIAPER_PROGRAM') {
+    if (this.program === "Diaper Program") {
       try {
         for(let i = 0; i < this.quantity!; i++) {
           

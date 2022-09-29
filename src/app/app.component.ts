@@ -8,4 +8,5 @@ import foodPantry from './repositories/foodPantry.repository';
 })
 export class AppComponent {
   title = 'InventoryManagementSystem';
+  foodPantry = foodPantry;
 }
