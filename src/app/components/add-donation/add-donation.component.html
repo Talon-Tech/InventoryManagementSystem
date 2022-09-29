@@ -1,18 +1,22 @@
-<mat-card fxFlex fxLayout="column" fxLayoutGap="10px">
+<mat-card 
+    fxFlex fxLayout="column" 
+    fxLayoutGap="10px"
+    fxLayoutAlign="space-evenly"
+>
     <p>Add a Donation</p>
-    <div class="example-form-field" appearance="fill">
+    <div appearance="fill">
         <mat-label>Name:</mat-label>
         <input class="" matInput type="text" [(ngModel)]="name">
     </div>
-    <div class="example-form-field" appearance="fill">
+    <div appearance="fill">
         <mat-label>Quantity:</mat-label>
         <input class="" matInput type="text" [(ngModel)]="quantity">
     </div>
-    <div class="example-form-field" appearance="fill">
+    <div appearance="fill">
         <mat-label>Donator:</mat-label>
         <input type="text" [(ngModel)]="donator">
     </div>
-    <div class="example-form-field" appearance="fill">
+    <div appearance="fill">
         <mat-label>Program:</mat-label>
         <mat-select [(ngModel)]="program" aria-label="Select an option">
             <mat-option *ngFor="let SAFEProgram of programs" [value]="SAFEProgram">
