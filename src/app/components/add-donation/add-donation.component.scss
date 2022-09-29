@@ -1,9 +1,10 @@
 .mat-select-content {
-    background-color: grey;
-    min-width: 155px;
+    background-color: rgb(97, 97, 97);
+    width: 100%;
     text-align: center;
+    border: .5px solid rgb(64, 64, 64);
 }
 
-.flex-container {
-    display: flex;
+.small {
+    max-width: 50%;
 }

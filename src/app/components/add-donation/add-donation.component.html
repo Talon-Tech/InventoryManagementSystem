@@ -1,27 +1,26 @@
-<mat-card>
-    <p>Add a Donation</p>
-    <div>
-        <div>
-            <mat-label>Name:</mat-label>
-            <mat-label>Quantity:</mat-label>
-            <mat-label>Donor:</mat-label>
-            <mat-label>Program:</mat-label>
+<mat-card class="flex-container center bgDark">
+    <div class="flex-container column bgDark mM pM bLight">
+        <p>Add a Donation</p>
+        <div class="flex-container center mM pM bLight">
+            <div class="flex-container column center mM">
+                <mat-label>Name:</mat-label>
+                <mat-label>Quantity:</mat-label>
+                <mat-label>Vendor:</mat-label>
+                <mat-label>Program:</mat-label>
+            </div>
+            <div class="flex-container column center mM">
+                <input matInput type="text" [(ngModel)]="name">
+                <input matInput type="text" [(ngModel)]="quantity">
+                <input type="text" [(ngModel)]="donator">
+                <mat-select class="mat-select-content" [(ngModel)]="program" aria-label="Select an option">
+                    <mat-option *ngFor="let SAFEProgram of programs" [value]="SAFEProgram">
+                        {{SAFEProgram}}
+                    </mat-option>
+                </mat-select>
+            </div>
+            <button class="center" mat-fab color="primary" aria-label="Example icon button with a delete icon" (click)="addDonation()">
+                <mat-icon fontIcon="add_circle"></mat-icon>
+            </button>
         </div>
-        <div>
-            <input matInput type="text" [(ngModel)]="name">
-            <input matInput type="text" [(ngModel)]="quantity">
-            <input type="text" [(ngModel)]="donator">
-            <mat-select class="mat-select-content" [(ngModel)]="program" aria-label="Select an option">
-                <mat-option *ngFor="let SAFEProgram of programs" [value]="SAFEProgram">
-                    {{SAFEProgram}}
-                </mat-option>
-            </mat-select>
-        </div>
-
-        <button mat-fab color="primary" aria-label="Example icon button with a delete icon" (click)="addDonation()">
-            <mat-icon fontIcon="add_circle"></mat-icon>
-        </button>
     </div>
-
-
 </mat-card>
