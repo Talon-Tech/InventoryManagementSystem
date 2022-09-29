@@ -1,32 +1,28 @@
-<mat-card 
-    fxFlex fxLayout="column" 
-    fxLayoutGap="10px"
-    fxLayoutAlign="space-evenly"
->
+
+<mat-card fxFlex fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="space-evenly center">
     <p>Add a Donation</p>
-    <div appearance="fill">
-        <mat-label>Name:</mat-label>
-        <input class="" matInput type="text" [(ngModel)]="name">
-    </div>
-    <div appearance="fill">
-        <mat-label>Quantity:</mat-label>
-        <input class="" matInput type="text" [(ngModel)]="quantity">
-    </div>
-    <div appearance="fill">
-        <mat-label>Donator:</mat-label>
-        <input type="text" [(ngModel)]="donator">
-    </div>
-    <div appearance="fill">
-        <mat-label>Program:</mat-label>
-        <mat-select [(ngModel)]="program" aria-label="Select an option">
-            <mat-option *ngFor="let SAFEProgram of programs" [value]="SAFEProgram">
-                {{SAFEProgram}}
-            </mat-option>
-        </mat-select>
-    </div>
-    <div>
-        <button color="primary" aria-label="Example icon button with a delete icon" (click)="addDonation()">
-            <mat-icon>add_circle_outline</mat-icon>
+    <div fxFlex fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="space-evenly center">
+        <div fxFlex fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="space-evenly center">
+            <mat-label>Name:</mat-label>
+            <mat-label>Quantity:</mat-label>
+            <mat-label>Donor:</mat-label>
+            <mat-label>Program:</mat-label>
+        </div>
+        <div fxFlex fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="space-evenly center">
+            <input matInput type="text" [(ngModel)]="name">
+            <input matInput type="text" [(ngModel)]="quantity">
+            <input type="text" [(ngModel)]="donator">
+            <mat-select class="mat-select-content" [(ngModel)]="program" aria-label="Select an option">
+                <mat-option *ngFor="let SAFEProgram of programs" [value]="SAFEProgram">
+                    {{SAFEProgram}}
+                </mat-option>
+            </mat-select>
+        </div>
+        
+        <button mat-fab color="primary" aria-label="Example icon button with a delete icon" (click)="addDonation()">
+            <mat-icon fontIcon="add_circle_outline"></mat-icon>
         </button>
     </div>
+
+
 </mat-card>
