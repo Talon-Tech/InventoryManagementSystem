@@ -1,14 +1,13 @@
-
-<mat-card fxFlex fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="space-evenly center">
+<mat-card>
     <p>Add a Donation</p>
-    <div fxFlex fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="space-evenly center">
-        <div fxFlex fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="space-evenly center">
+    <div>
+        <div>
             <mat-label>Name:</mat-label>
             <mat-label>Quantity:</mat-label>
             <mat-label>Donor:</mat-label>
             <mat-label>Program:</mat-label>
         </div>
-        <div fxFlex fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="space-evenly center">
+        <div>
             <input matInput type="text" [(ngModel)]="name">
             <input matInput type="text" [(ngModel)]="quantity">
             <input type="text" [(ngModel)]="donator">
@@ -18,9 +17,9 @@
                 </mat-option>
             </mat-select>
         </div>
-        
+
         <button mat-fab color="primary" aria-label="Example icon button with a delete icon" (click)="addDonation()">
-            <mat-icon fontIcon="add_circle_outline"></mat-icon>
+            <mat-icon fontIcon="add_circle"></mat-icon>
         </button>
     </div>
 

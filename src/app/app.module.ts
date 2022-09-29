@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 
-import { FlexLayoutModule } from '@angular/flex-layout';
-
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule} from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
@@ -35,7 +33,6 @@ import { AddDonationComponent } from './components/add-donation/add-donation.com
     FormsModule,
     MatRadioModule,
     MatSelectModule,
-    FlexLayoutModule
   ],
   imports: [
     BrowserModule,
@@ -51,7 +48,6 @@ import { AddDonationComponent } from './components/add-donation/add-donation.com
     FormsModule,
     MatRadioModule,
     MatSelectModule,
-    FlexLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]
