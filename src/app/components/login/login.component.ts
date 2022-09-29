@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import loginArray from 'src/app/repositories/userLogins.repository';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,11 +9,14 @@ import loginArray from 'src/app/repositories/userLogins.repository';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router){
+  }
 
   ngOnInit(): void {
   }
 
+  fakeUsername: string = "Matt";
+  fakePassword: string = "1234";
   username?: string;
   password?: string;
 
@@ -24,6 +27,11 @@ export class LoginComponent implements OnInit {
     });
 
     console.log(loginArray);
+    alert('Welcome!  You are now logged in and may add a donation');
+    this.router.navigate(['/add-donation']);
+  }
+
+  validate(){
 
   }
 
