@@ -1,0 +1,25 @@
+<div class="container">
+    <h1>Add a New Organization</h1> 
+    <form #myForm="ngForm" class="example-form" (ngSubmit)="AddOrg(); myForm.resetForm()">
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Organization Name</mat-label>
+          <input matInput required name="orgName" [(ngModel)]="orgName">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Organization Contact First Name</mat-label>
+            <input matInput required name="orgContactFirstName" [(ngModel)]="orgContactFirstName">
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Organization Contact Last Name</mat-label>
+            <input matInput required name="orgContactLasstName" [(ngModel)]="orgContactLastName">
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Organization Contact Phone</mat-label>
+            <input type="tel" matInput required name="orgContactPhone" [(ngModel)]="orgContactPhone">
+          </mat-form-field>
+          <button mat-raised-button color="primary">Submit</button>
+      </form>
+</div>
