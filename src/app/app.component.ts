@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import foodPantry from './repositories/foodPantry.repository';
 
 @Component({
   selector: 'app-root',

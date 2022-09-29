@@ -1,15 +1,28 @@
-<mat-card>
+<mat-card fxFlex fxLayout="column" fxLayoutGap="10px">
     <p>Add a Donation</p>
-    <mat-form-field class="example-form-field" appearance="fill">
+    <div class="example-form-field" appearance="fill">
         <mat-label>Name:</mat-label>
-        <input type="text" [value]="name">
-    </mat-form-field>
-    <mat-form-field class="example-form-field" appearance="fill">
+        <input class="" matInput type="text" [(ngModel)]="name">
+    </div>
+    <div class="example-form-field" appearance="fill">
+        <mat-label>Quantity:</mat-label>
+        <input class="" matInput type="text" [(ngModel)]="quantity">
+    </div>
+    <div class="example-form-field" appearance="fill">
         <mat-label>Donator:</mat-label>
-        <input type="text" [value]="donator">
-    </mat-form-field>
-    <mat-form-field class="example-form-field" appearance="fill">
+        <input type="text" [(ngModel)]="donator">
+    </div>
+    <div class="example-form-field" appearance="fill">
         <mat-label>Program:</mat-label>
-        <input type="text" [value]="program">
-    </mat-form-field>
+        <mat-select [(ngModel)]="program" aria-label="Select an option">
+            <mat-option *ngFor="let SAFEProgram of programs" [value]="SAFEProgram">
+                {{SAFEProgram}}
+            </mat-option>
+        </mat-select>
+    </div>
+    <div>
+        <button color="primary" aria-label="Example icon button with a delete icon" (click)="addDonation()">
+            <mat-icon>add_circle_outline</mat-icon>
+        </button>
+    </div>
 </mat-card>

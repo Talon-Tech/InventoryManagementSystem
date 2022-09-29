@@ -5,6 +5,7 @@ import { v4 as uuidv4} from "uuid";
 import donationRepository from 'src/app/repositories/donation.repository';
 import Donation from 'src/app/models/donation.model';
 import { SAFEProgram } from 'src/app/models/SAFEProgram.type';
+import SAFEProgramsReadable from 'src/app/models/SAFEProgramsReadable.model';
 import foodPantry from 'src/app/repositories/foodPantry.repository';
 import periodProgram from 'src/app/repositories/periodProgam.repository';
 import collegeReadiness from 'src/app/repositories/collegeReadiness.repository';
@@ -22,16 +23,17 @@ export class AddDonationComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  name?: string;
-  donator?: string;
-  program?: SAFEProgram;
-  quantity?: number;
+  public name?: string;
+  public donator?: string;
+  public program?: SAFEProgram;
+  public quantity?: number;
+  public programs: Array<string> = SAFEProgramsReadable;
 
   validateDonation = ():boolean => {
-    return this.name && this.donator && this.program && this.quantity ? true : false;
+    return this.name && this.donator && this.program && this.quantity ? false : true;
   }
 
-  addDonation = ():boolean => {
+  public addDonation = ():boolean => {
     let errors = this.validateDonation();
 
     if (errors) {
@@ -51,6 +53,8 @@ export class AddDonationComponent implements OnInit {
 
         }
         
+        console.log("It worked!")
+
         return true;
       } catch (error) {
         console.log(error);
