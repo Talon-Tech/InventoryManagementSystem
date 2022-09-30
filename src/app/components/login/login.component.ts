@@ -26,12 +26,12 @@ export class LoginComponent implements OnInit {
       password: this.password!
     });
 
-    console.log(loginArray);
-    alert('Welcome!  You are now logged in and may add a donation');
+    if (this.username == this.fakeUsername && this.password == this.fakePassword){
     this.router.navigate(['/add-donation']);
-  }
-
-  validate(){
+     }
+     else{
+      alert('Invalid pls try again');
+     }
 
   }
 
