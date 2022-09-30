@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
     });
 
     if (this.username == this.fakeUsername && this.password == this.fakePassword){
+    alert('Success, you may now add a donation!')
     this.router.navigate(['/add-donation']);
      }
      else{
