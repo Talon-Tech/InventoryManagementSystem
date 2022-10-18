@@ -118,6 +118,8 @@ export class AddDonationComponent implements OnInit {
 
         }
         
+        console.log(diaperProgram);
+
         return true;
       } catch (error) {
         console.log(error);
