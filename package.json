@@ -10,7 +10,6 @@
   },
   "private": true,
   "dependencies": {
-<<<<<<< HEAD
     "@angular/animations": "~14.2.6",
     "@angular/cdk": "^14.2.5",
     "@angular/common": "~14.2.6",
@@ -21,18 +20,6 @@
     "@angular/platform-browser": "~14.2.6",
     "@angular/platform-browser-dynamic": "~14.2.6",
     "@angular/router": "~14.2.6",
-=======
-    "@angular/animations": "^14.2.4",
-    "@angular/cdk": "^13.3.9",
-    "@angular/common": "^14.2.4",
-    "@angular/compiler": "^14.2.4",
-    "@angular/core": "^14.2.4",
-    "@angular/forms": "^14.2.4",
-    "@angular/material": "^13.3.9",
-    "@angular/platform-browser": "^14.2.4",
-    "@angular/platform-browser-dynamic": "^14.2.4",
-    "@angular/router": "^14.2.4",
->>>>>>> Sophia
     "firebase": "^9.10.0",
     "firebase-tools": "^11.9.0",
     "rxjs": "~7.4.0",
@@ -40,15 +27,9 @@
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
-<<<<<<< HEAD
     "@angular-devkit/build-angular": "~14.2.6",
     "@angular/cli": "~14.2.6",
     "@angular/compiler-cli": "~14.2.6",
-=======
-    "@angular-devkit/build-angular": "^14.2.4",
-    "@angular/cli": "^14.2.4",
-    "@angular/compiler-cli": "^14.2.4",
->>>>>>> Sophia
     "@types/jasmine": "~3.10.0",
     "@types/node": "^12.11.1",
     "@types/uuid": "^8.3.4",
