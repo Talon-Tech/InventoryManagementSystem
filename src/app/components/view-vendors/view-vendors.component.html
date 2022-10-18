@@ -1,0 +1,38 @@
+<div class="container">
+    <h1>All Vendors</h1>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <!-- ID -->
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> Organization No. </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+
+        <!-- Organization Name -->
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+
+        <!-- Contact First Name -->
+        <ng-container matColumnDef="contactFirst">
+            <th mat-header-cell *matHeaderCellDef> Contact First Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.contactFirst}} </td>
+        </ng-container>
+
+        <!-- Contact Last Name -->
+        <ng-container matColumnDef="contactLast">
+            <th mat-header-cell *matHeaderCellDef> Contact Last Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.contactLast}} </td>
+        </ng-container>
+
+        <!-- Contact Phone -->
+        <ng-container matColumnDef="contactPhone">
+            <th mat-header-cell *matHeaderCellDef> Phone </th>
+            <td mat-cell *matCellDef="let element"> {{element.contactPhone}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>
