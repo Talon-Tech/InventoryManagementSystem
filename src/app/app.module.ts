@@ -12,11 +12,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AddDonationComponent } from './components/add-donation/add-donation.component';
+import { LoginComponent } from './components/login/login.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AddDonationComponent
+    AddDonationComponent,
+    LoginComponent,
   ],
   exports: [
     MatButtonModule,
@@ -35,7 +38,8 @@ import { AddDonationComponent } from './components/add-donation/add-donation.com
     MatToolbarModule,
     MatIconModule,
     MatCardModule,
-    MatInputModule
+    MatInputModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

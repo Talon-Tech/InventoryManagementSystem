@@ -2,14 +2,14 @@
     <p>Add a Donation</p>
     <mat-form-field class="example-form-field" appearance="fill">
         <mat-label>Name:</mat-label>
-        <input type="text" [value]="name">
+        <input matInput type="text" [(ngModel)]="name">
     </mat-form-field>
     <mat-form-field class="example-form-field" appearance="fill">
         <mat-label>Donator:</mat-label>
-        <input type="text" [value]="donator">
+        <input matInput type="text" [(ngModel)]="donator">
     </mat-form-field>
     <mat-form-field class="example-form-field" appearance="fill">
         <mat-label>Program:</mat-label>
-        <input type="text" [value]="program">
+        <input matInput type="text" [(ngModel)]="program">
     </mat-form-field>
 </mat-card>
