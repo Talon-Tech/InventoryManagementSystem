@@ -1,1 +1,1 @@
-export type SAFEProgram = "PERIOD_PROGRAM" | "FOOD_PANTRY" | "DIAPER_PROGRAM" | "COLLEGE_READINESS";
+export type SAFEProgram = "Period Program" | "Food Pantry" | "Diaper Program" | "College Readiness"
