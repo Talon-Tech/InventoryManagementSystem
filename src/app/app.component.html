@@ -1,20 +1,10 @@
-<div class="flex-container column center">
-  <div>
-    Diaper Program items:
-    {{diaperProgram.length}}
-  </div>
-  <div>
-    Food Pantry items:
-    {{foodPantry.length}}
-  </div>
-  <div>
-    College Readiness items:
-    {{collegeReadiness.length}}
-  </div>
-  <div>
-    Period Program items:
-    {{periodProgram.length}}
-  </div>
+<mat-toolbar>
+  <span>Inventory Management System</span>
+  <button routerLink="/login" mat-button>Login</button>
+  <button routerLink="/add-donation" mat-button>Add Donation</button>
+  <button routerLink="/view-donations" mat-button>Donations Dashboard</button>
+  <button routerLink="/new-vendor" mat-button>Add Vendor</button>
+  <button routerLink="/view-vendors" mat-button>Vendors Dashboard</button>
 
-</div>
+</mat-toolbar>
 <router-outlet></router-outlet>
