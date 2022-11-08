@@ -6,7 +6,7 @@ import { Token } from '../models/token.model';
   providedIn: 'root'
 })
 
-export class userService {
+export class UserloginService {
 
   @Output() userLoggedIn = new EventEmitter<boolean>();
  
