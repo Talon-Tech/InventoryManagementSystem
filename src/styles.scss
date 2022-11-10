@@ -1,13 +1,53 @@
 /* You can add global styles to this file, and also import other style files */
 
-html,
-body {
-    height: 100%;
+html, body { height: 100%; margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.flex-container {
+    display: flex;
+    border-radius: 2%;
+    width: auto;
+    margin: auto;
 }
 
-body {
-    margin: 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
+.row {
+    flex-direction: row;
+}
+
+.column {
+    flex-direction: column;
+}
+
+.center {
+    justify-content: center;
+    align-items: center;
+}
+
+.bgGray {
+    background-color: #ababab;
+}
+
+.bgLight {
+    background-color: #f0f0f0;
+}
+
+.bgDark {
+    background-color: #171717;
+}
+
+.mM {
+    margin: 10px;
+}
+
+.pM {
+    padding: 20px;
+}
+
+.bLight {
+    border: 1px solid rgb(234, 234, 234);
+}
+
+.bDark {
+    border: 1px solid rgb(22, 22, 22);
 }
 
 .container {
