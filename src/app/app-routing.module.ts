@@ -6,6 +6,7 @@ import { LoginComponent } from './components/login/login.component';
 import { Example } from './components/view-donation/view-donation.component';
 import { AddVendorComponent } from './components/add-vendor/add-vendor.component';
 import { ViewVendorsComponent } from './components/view-vendors/view-vendors.component';
+import { RemoveDonationsComponent } from './components/donations/remove-donations/remove-donations/remove-donations.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,11 @@ const routes: Routes = [
     path: 'add-donation',
     component: AddDonationComponent
   },
+  {
+    path: 'remove-donation',
+    component: RemoveDonationsComponent
+  }
+  ,
   {
     path: 'view-donations',
     component: Example

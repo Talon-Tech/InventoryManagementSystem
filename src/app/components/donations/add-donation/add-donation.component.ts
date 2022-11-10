@@ -14,7 +14,7 @@ import diaperProgram from 'src/app/repositories/diaperProgram.repository';
 @Component({
   selector: 'app-add-donation',
   templateUrl: './add-donation.component.html',
-  styleUrls: ['./add-donation.component.scss']
+  styleUrls: ['../donations.scss']
 })
 export class AddDonationComponent implements OnInit {
 
