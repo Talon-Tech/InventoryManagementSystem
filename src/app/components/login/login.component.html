@@ -11,7 +11,7 @@
     <button id="basic" type="button" mat-button (click)="Login()">
         Login
       </button>
-      <button id="basic" type="button" mat-button (click)="Login()">
-        Logout
-      </button>
+      <div class="alert alert-danger" role="alert" *ngIf="errorOccured">
+        Bad Username or Password!
+      </div>
   </mat-card>

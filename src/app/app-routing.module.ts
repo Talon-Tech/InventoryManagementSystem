@@ -6,6 +6,7 @@ import { LoginComponent } from './components/login/login.component';
 import { Example } from './components/view-donation/view-donation.component';
 import { AddVendorComponent } from './components/add-vendor/add-vendor.component';
 import { ViewVendorsComponent } from './components/view-vendors/view-vendors.component';
+import { AuthGService } from './services/auth-g.service';
 
 const routes: Routes = [
   {
@@ -14,7 +15,8 @@ const routes: Routes = [
   },
   {
     path: 'add-donation',
-    component: AddDonationComponent
+    component: AddDonationComponent,
+    canActivate:[AuthGService]
   },
   {
     path: 'view-donations',
