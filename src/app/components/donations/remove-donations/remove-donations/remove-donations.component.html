@@ -19,16 +19,12 @@
             {{SAFEProgram}}
           </mat-option>
         </mat-select>
-        <mat-select class="mat-select-content" [(ngModel)]="name" aria-label="Select an option">
-          <mat-option *ngFor="let donation of allDonations" [value]="donation">
-            {{donation.name}}
-          </mat-option>
-        </mat-select>
+        <input type="text" [(ngModel)]="name" required /> 
         <input type="number" [(ngModel)]="quantity" min="0" required />  
       </div>
       <button class="center" mat-mini-fab color="primary" aria-label="Example icon button with a delete icon"
         (click)="removeDonation()">
-        <mat-icon fontIcon="add_circle"></mat-icon>
+        <mat-icon fontIcon="commit"></mat-icon>
       </button>
     </div>
   </div>

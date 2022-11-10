@@ -39,12 +39,18 @@ export class RemoveDonationsComponent implements OnInit {
     return this.name && this.donator && this.program && this.quantity ? false : true;
   }
 
+  lowerCaseDonationName = () => {
+    this.name = this.name?.toLowerCase();
+  }
+
   public removeDonation = (): boolean => {
     let errors = this.validateDonation();
 
     if (errors) {
       return false;
     }
+
+    this.lowerCaseDonationName();
 
     if (this.program === "Period Program") {
 
@@ -59,7 +65,7 @@ export class RemoveDonationsComponent implements OnInit {
             donator: foundItem.donator,
             program: foundItem.program,
             quantity: foundItem.quantity - this.quantity!
-          })
+          });
           return true;
         }
 
