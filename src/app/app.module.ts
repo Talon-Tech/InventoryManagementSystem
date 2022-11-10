@@ -20,6 +20,7 @@ import { FormsModule } from '@angular/forms';
 import { Example } from './components/view-donation/view-donation.component';
 import { AddVendorComponent } from './components/add-vendor/add-vendor.component';
 import { ViewVendorsComponent } from './components/view-vendors/view-vendors.component';
+import { EditVendorComponent } from './components/edit-vendor/edit-vendor.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ViewVendorsComponent } from './components/view-vendors/view-vendors.com
     LoginComponent,
     Example,
     AddVendorComponent,
-    ViewVendorsComponent
+    ViewVendorsComponent,
+    EditVendorComponent
   ],
   exports: [
     MatButtonModule,

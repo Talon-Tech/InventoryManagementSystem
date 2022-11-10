@@ -1,27 +1,28 @@
 <div class="container">
-    <h1>Add a New Organization</h1> 
+  <h1>Add a New Organization</h1>
+  <mat-card>
     <form [formGroup]="vendorForm" class="example-form" (ngSubmit)="onSubmit()">
-        <mat-form-field class="example-full-width" appearance="fill">
-          <mat-label>Organization Name</mat-label>
-          <input matInput required name="orgName" formControlName="name">
-        </mat-form-field>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Organization Name</mat-label>
+        <input matInput type="text" required name="orgName" formControlName="name">
+      </mat-form-field>
 
-        <mat-form-field class="example-full-width" appearance="fill">
-            <mat-label>Organization Contact First Name</mat-label>
-            <input matInput required name="orgContactFirstName" formControlName="contactFirst">
-          </mat-form-field>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Organization Contact First Name</mat-label>
+        <input matInput required name="orgContactFirstName" formControlName="contactFirst">
+      </mat-form-field>
 
-          <mat-form-field class="example-full-width" appearance="fill">
-            <mat-label>Organization Contact Last Name</mat-label>
-            <input matInput required name="orgContactLasstName" formControlName="contactLast">
-          </mat-form-field>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Organization Contact Last Name</mat-label>
+        <input matInput required name="orgContactLasstName" formControlName="contactLast">
+      </mat-form-field>
 
-          <mat-form-field class="example-full-width" appearance="fill">
-            <mat-label>Organization Contact Phone</mat-label>
-            <input type="tel" matInput required name="orgContactPhone" formControlName="contactPhone">
-          </mat-form-field>
-          <button mat-raised-button color="primary">Submit</button>
-          <button mat-raised-button color="accent" routerLink="/view">View Vendors</button>
-      </form>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Organization Contact Phone</mat-label>
+        <input type="tel" matInput required name="orgContactPhone" formControlName="contactPhone">
+      </mat-form-field>
+      <button mat-raised-button color="primary">Submit</button>
+      <button mat-raised-button color="accent" routerLink="/view-vendors">View Vendors</button>
+    </form>
+  </mat-card>
 </div>
-
