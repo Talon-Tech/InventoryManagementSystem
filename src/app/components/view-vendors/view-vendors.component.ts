@@ -12,7 +12,7 @@ const ELEMENT_DATA: Vendor[] = vendorArr;
 })
 export class ViewVendorsComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'name', 'contactFirst', 'contactLast', 'contactPhone'];
+  displayedColumns: string[] = ['id','name', 'contactFirst', 'contactLast', 'contactPhone', 'editIcon'];
   dataSource = ELEMENT_DATA;
 
   constructor() { }
