@@ -12,6 +12,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatTableModule } from '@angular/material/table';
+import { MatStepperModule } from '@angular/material/stepper';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -35,6 +36,7 @@ import { RemoveDonationsComponent } from './components/donations/remove-donation
     RemoveDonationsComponent
   ],
   exports: [
+    MatStepperModule,
     MatButtonModule,
     MatMenuModule,
     MatToolbarModule,
@@ -45,9 +47,11 @@ import { RemoveDonationsComponent } from './components/donations/remove-donation
     FormsModule,
     MatRadioModule,
     MatSelectModule,
-    MatInputModule
+    MatInputModule,
+    
   ],
   imports: [
+    MatStepperModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

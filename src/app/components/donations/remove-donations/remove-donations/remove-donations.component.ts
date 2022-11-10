@@ -2,11 +2,15 @@ import { Component, OnInit } from '@angular/core';
 
 import { SAFEProgram } from 'src/app/models/SAFEProgram.type';
 import SAFEProgramsReadable from 'src/app/models/SAFEProgramsReadable.model';
+
+import donationRepository from 'src/app/repositories/donation.repository';
 import collegeReadiness from 'src/app/repositories/collegeReadiness.repository';
 import diaperProgram from 'src/app/repositories/diaperProgram.repository';
 import foodPantry from 'src/app/repositories/foodPantry.repository';
 import periodProgram from 'src/app/repositories/periodProgam.repository';
 import vendorArr from 'src/app/repositories/vendor.repository';
+import Vendor from 'src/app/models/vendor.model';
+import Donation from 'src/app/models/donation.model';
 
 @Component({
   selector: 'app-remove-donations',
@@ -15,16 +19,19 @@ import vendorArr from 'src/app/repositories/vendor.repository';
 })
 export class RemoveDonationsComponent implements OnInit {
 
-  constructor() {}
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
 
   public name?: string;
-  public donator?: Array<string> = vendorArr.map(vendor => vendor.name);
+  public donator?: string;
+  public vendors?: Array<Vendor> = vendorArr;
   public program?: SAFEProgram;
   public quantity?: number;
   public programs: Array<string> = SAFEProgramsReadable;
+  public allDonations: Array<Donation> = [...collegeReadiness, ...diaperProgram, ...foodPantry, ...periodProgram];
 
   validateDonation = (): boolean => {
     if (this.quantity && this.quantity < 0)
