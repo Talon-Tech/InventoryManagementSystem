@@ -1,1 +1,31 @@
-<p>remove-donations works!</p>
+<mat-card class="addDonation flex-container bgDark bLight">
+    <div class="flex-container center column bgDark mM pM">
+        <p>Remove a Donation</p>
+        <div class="flex-container center bLight pM">
+            <div class="flex-container column center mM">
+                <mat-label>Name:</mat-label>
+                <mat-label>Quantity:</mat-label>
+                <mat-label>Vendor:</mat-label>
+                <mat-label>Program:</mat-label>
+            </div>
+            <div class="flex-container column center mM">
+                <input type="text" [(ngModel)]="name" required />
+                <input type="text" [(ngModel)]="quantity" required />
+                <mat-select class="mat-select-content" [(ngModel)]="donator" aria-label="Select an option">
+                  <mat-option *ngFor="let vendor of donator" [value]="vendor">
+                      {{vendor}}
+                  </mat-option>
+              </mat-select>
+                <mat-select class="mat-select-content" [(ngModel)]="program" aria-label="Select an option">
+                    <mat-option *ngFor="let SAFEProgram of programs" [value]="SAFEProgram">
+                        {{SAFEProgram}}
+                    </mat-option>
+                </mat-select>
+            </div>
+            <button class="center" mat-mini-fab color="primary" aria-label="Example icon button with a delete icon" (click)="removeDonation()">
+                <mat-icon fontIcon="add_circle"></mat-icon>
+            </button>
+        </div>
+    </div>
+    
+</mat-card>
