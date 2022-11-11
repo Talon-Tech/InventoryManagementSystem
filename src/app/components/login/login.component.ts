@@ -1,40 +1,32 @@
 import { Component, OnInit } from '@angular/core';
-import loginArray from 'src/app/repositories/userLogins.repository';
 import { Router } from '@angular/router';
+import { UserloginService } from 'src/app/services/userlogin.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
+
 export class LoginComponent implements OnInit {
 
-  constructor(private router: Router){
-  }
+  constructor(private router:Router, private userlogin: UserloginService){ }
+  username='';
+  password='';
+  errorOccured=false;
 
   ngOnInit(): void {
   }
 
-  fakeUsername: string = "Matt";
-  fakePassword: string = "1234";
-  username?: string;
-  password?: string;
-
-  clicked(){
-    loginArray.push({
-      name: this.username!,
-      password: this.password!
-    });
-
-    if (this.username == this.fakeUsername && this.password == this.fakePassword){
-    alert('Success, you may now add a donation!')
-    this.router.navigate(['/add-donation']);
-     }
-     else{
-      alert('Invalid pls try again');
-     }
-
+  Login(){
+    let result =this.userlogin.Login(this.username,this.password);
+    if(result)
+    {
+        this.router.navigate(['/add-donation']);
+    }
+    else
+    {
+      this.errorOccured=true;
+    }
   }
-
 }
-

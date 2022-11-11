@@ -13,7 +13,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatTableModule } from '@angular/material/table';
 import { MatSidenavModule } from '@angular/material/sidenav';
-
+import { MatStepperModule } from '@angular/material/stepper';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -23,6 +23,7 @@ import { FormsModule } from '@angular/forms';
 import { Example } from './components/view-donation/view-donation.component';
 import { AddVendorComponent } from './components/add-vendor/add-vendor.component';
 import { ViewVendorsComponent } from './components/view-vendors/view-vendors.component';
+import { EditVendorComponent } from './components/edit-vendor/edit-vendor.component';
 import { RemoveDonationsComponent } from './components/donations/remove-donations/remove-donations/remove-donations.component';
 import { MatListModule } from '@angular/material/list';
 import { ToolBarWSideNavComponent } from './components/tool-bar-w-side-nav/tool-bar-w-side-nav.component';
@@ -36,9 +37,11 @@ import { ToolBarWSideNavComponent } from './components/tool-bar-w-side-nav/tool-
     AddVendorComponent,
     ViewVendorsComponent,
     RemoveDonationsComponent,
-    ToolBarWSideNavComponent
+    ToolBarWSideNavComponent,
+    EditVendorComponent
   ],
   exports: [
+    MatStepperModule,
     MatButtonModule,
     MatMenuModule,
     MatToolbarModule,
@@ -54,6 +57,7 @@ import { ToolBarWSideNavComponent } from './components/tool-bar-w-side-nav/tool-
     MatListModule
   ],
   imports: [
+    MatStepperModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

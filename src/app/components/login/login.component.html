@@ -8,10 +8,10 @@
         <mat-label>Password:</mat-label>
         <input matInput type="text" [(ngModel)]="password">
     </mat-form-field>
-    <button id="basic" type="button" mat-button (click)="clicked()">
+    <button id="basic" type="button" mat-button (click)="Login()">
         Login
       </button>
-      <button id="basic" type="button" mat-button (click)="clicked()">
-        Logout
-      </button>
+      <div class="alert alert-danger" role="alert" *ngIf="errorOccured">
+        Bad Username or Password!
+      </div>
   </mat-card>
