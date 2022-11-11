@@ -1,5 +1,5 @@
-<!--
-  <mat-toolbar>
+
+<mat-toolbar>
   <span>Inventory Management System</span>
   <button *ngIf="!currentUser" [routerLink]="['/login']" mat-button>Login</button>
   <button *ngIf="currentUser" [routerLink]="['/login']" mat-button (click)="LogoutUser()">Logout</button>
@@ -9,10 +9,9 @@
   <button routerLink="/new-vendor" mat-button>Add Vendor</button>
   <button routerLink="/view-vendors" mat-button>Vendors Dashboard</button>
   <button routerLink="/tool-bar-w-side-nav" mat-button>Toobar</button>
-
 </mat-toolbar>
---->
-<app-tool-bar-w-side-nav></app-tool-bar-w-side-nav>
+<!-- <app-tool-bar-w-side-nav></app-tool-bar-w-side-nav> -->
 <div class="center">
+  
   <router-outlet></router-outlet>
 </div>
