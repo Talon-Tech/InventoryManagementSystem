@@ -56,13 +56,16 @@ export class RemoveDonationsComponent implements OnInit {
       try {
         if (foundItem) {
           let oldQuantity = foundItem.quantity;
-          let newQuantity = this.quantity! + oldQuantity
+          let newQuantity = 0;
+          if (oldQuantity - this.quantity! > 0) {
+            newQuantity = oldQuantity - this.quantity!;
+          }
           let updatedDonation = {
             id: foundItem.id,
             name: nameLowerCase,
             donator: foundItem.donator,
             program: foundItem.program,
-            quantity: (foundItem.quantity - this.quantity! <= 0 ? 0 : newQuantity)
+            quantity: newQuantity
           }
           periodProgram.splice(periodProgram.indexOf(foundItem), 1, updatedDonation);
           console.log("remaining inventory", updatedDonation)
@@ -86,13 +89,16 @@ export class RemoveDonationsComponent implements OnInit {
       try {
         if (foundItem) {
           let oldQuantity = foundItem.quantity;
-          let newQuantity = this.quantity! + oldQuantity
+          let newQuantity = 0;
+          if (oldQuantity - this.quantity! > 0) {
+            newQuantity = oldQuantity - this.quantity!;
+          }
           let updatedDonation = {
             id: foundItem.id,
             name: nameLowerCase,
             donator: foundItem.donator,
             program: foundItem.program,
-            quantity: (foundItem.quantity - this.quantity! <= 0 ? 0 : newQuantity)
+            quantity: newQuantity
           }
           foodPantry.splice(foodPantry.indexOf(foundItem), 1, updatedDonation)
           console.log("remaining inventory", updatedDonation)
@@ -114,13 +120,16 @@ export class RemoveDonationsComponent implements OnInit {
       try {
         if (foundItem) {
           let oldQuantity = foundItem.quantity;
-          let newQuantity = this.quantity! + oldQuantity
+          let newQuantity = 0;
+          if (oldQuantity - this.quantity! > 0) {
+            newQuantity = oldQuantity - this.quantity!;
+          }
           let updatedDonation = {
             id: foundItem.id,
             name: nameLowerCase,
             donator: foundItem.donator,
             program: foundItem.program,
-            quantity: (foundItem.quantity - this.quantity! <= 0 ? 0 : newQuantity)
+            quantity: newQuantity
           }
           collegeReadiness.splice(collegeReadiness.indexOf(foundItem), 1, updatedDonation)
           console.log("remaining inventory", updatedDonation)
@@ -142,13 +151,16 @@ export class RemoveDonationsComponent implements OnInit {
       try {
         if (foundItem) {
           let oldQuantity = foundItem.quantity;
-          let newQuantity = this.quantity! + oldQuantity
+          let newQuantity = 0;
+          if (oldQuantity - this.quantity! > 0) {
+            newQuantity = oldQuantity - this.quantity!;
+          }
           let updatedDonation = {
             id: foundItem.id,
             name: nameLowerCase,
             donator: foundItem.donator,
             program: foundItem.program,
-            quantity: (foundItem.quantity - this.quantity! <= 0 ? 0 : newQuantity)
+            quantity: newQuantity
           }
           diaperProgram.splice(diaperProgram.indexOf(foundItem), 1, updatedDonation)
           console.log("remaining inventory", updatedDonation)
