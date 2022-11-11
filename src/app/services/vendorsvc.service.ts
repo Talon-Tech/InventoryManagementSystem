@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 import Vendor from 'src/app/models/vendor.model';
 import vendorArr from 'src/app/repositories/vendor.repository';
@@ -8,16 +9,30 @@ import vendorArr from 'src/app/repositories/vendor.repository';
 })
 export class VendorsvcService {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
-  GetVendor(id:any) {
+  GetVendor(id: any) {
     let vendor = vendorArr.find(x => x.id == id);
-    return vendor; 
+    return vendor;
   }
 
-  UpdateVendor(vendor:Vendor) {
-    let currentVendor = this.GetVendor(vendor.id); 
-    currentVendor!.contactFirst = vendor.contactFirst;     
+  GetVendors() {
+    return vendorArr; 
+  }
+
+  UpdateVendor(vendor: Vendor) {
+    let currentVendor = this.GetVendor(vendor.id);
+    currentVendor!.contactFirst = vendor.contactFirst;
+  }
+
+  DeleteVendor(id: any) {
+    let index = vendorArr.findIndex(i => i.id === id);
+    vendorArr.splice(index, 1);
+    // this.router.navigate(['/view-vendors']);
+    // this.router.navigate(['/view-vendors'])
+    //   .then(() => {
+    //     window.location.reload();
+    //   });
   }
 
 
