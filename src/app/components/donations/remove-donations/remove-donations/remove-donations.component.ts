@@ -39,10 +39,6 @@ export class RemoveDonationsComponent implements OnInit {
     return this.name && this.donator && this.program && this.quantity ? false : true;
   }
 
-  lowerCaseDonationName = () => {
-    this.name = this.name?.toLowerCase();
-  }
-
   public removeDonation = (): boolean => {
     let errors = this.validateDonation();
 
@@ -50,22 +46,29 @@ export class RemoveDonationsComponent implements OnInit {
       return false;
     }
 
-    this.lowerCaseDonationName();
+    let nameLowerCase = this.name!.toLowerCase();
 
     if (this.program === "Period Program") {
 
       //find item
-      let foundItem = periodProgram.find(item => item.name === this.name);
+      let foundItem = periodProgram.find(item => item.name === nameLowerCase);
 
       try {
         if (foundItem) {
-          periodProgram.splice(periodProgram.indexOf(foundItem), 1, {
+          let oldQuantity = foundItem.quantity;
+          let newQuantity = 0;
+          if (oldQuantity - this.quantity! > 0) {
+            newQuantity = oldQuantity - this.quantity!;
+          }
+          let updatedDonation = {
             id: foundItem.id,
-            name: foundItem.name,
+            name: nameLowerCase,
             donator: foundItem.donator,
             program: foundItem.program,
-            quantity: foundItem.quantity - this.quantity!
-          });
+            quantity: newQuantity
+          }
+          periodProgram.splice(periodProgram.indexOf(foundItem), 1, updatedDonation);
+          console.log("remaining inventory", updatedDonation)
           return true;
         }
 
@@ -81,17 +84,24 @@ export class RemoveDonationsComponent implements OnInit {
     if (this.program === "Food Pantry") {
 
       //find item
-      let foundItem = foodPantry.find(item => item.name === this.name);
+      let foundItem = foodPantry.find(item => item.name === nameLowerCase);
 
       try {
         if (foundItem) {
-          foodPantry.splice(foodPantry.indexOf(foundItem), 1, {
+          let oldQuantity = foundItem.quantity;
+          let newQuantity = 0;
+          if (oldQuantity - this.quantity! > 0) {
+            newQuantity = oldQuantity - this.quantity!;
+          }
+          let updatedDonation = {
             id: foundItem.id,
-            name: foundItem.name,
+            name: nameLowerCase,
             donator: foundItem.donator,
             program: foundItem.program,
-            quantity: foundItem.quantity - this.quantity!
-          })
+            quantity: newQuantity
+          }
+          foodPantry.splice(foodPantry.indexOf(foundItem), 1, updatedDonation)
+          console.log("remaining inventory", updatedDonation)
           return true;
         }
 
@@ -105,17 +115,24 @@ export class RemoveDonationsComponent implements OnInit {
 
     if (this.program === "College Readiness") {
       //find item
-      let foundItem = collegeReadiness.find(item => item.name === this.name);
+      let foundItem = collegeReadiness.find(item => item.name === nameLowerCase);
 
       try {
         if (foundItem) {
-          collegeReadiness.splice(collegeReadiness.indexOf(foundItem), 1, {
+          let oldQuantity = foundItem.quantity;
+          let newQuantity = 0;
+          if (oldQuantity - this.quantity! > 0) {
+            newQuantity = oldQuantity - this.quantity!;
+          }
+          let updatedDonation = {
             id: foundItem.id,
-            name: foundItem.name,
+            name: nameLowerCase,
             donator: foundItem.donator,
             program: foundItem.program,
-            quantity: foundItem.quantity - this.quantity!
-          })
+            quantity: newQuantity
+          }
+          collegeReadiness.splice(collegeReadiness.indexOf(foundItem), 1, updatedDonation)
+          console.log("remaining inventory", updatedDonation)
           return true;
         }
 
@@ -129,17 +146,24 @@ export class RemoveDonationsComponent implements OnInit {
     }
 
     if (this.program === "Diaper Program") {
-      let foundItem = diaperProgram.find(item => item.name === this.name);
+      let foundItem = diaperProgram.find(item => item.name === nameLowerCase);
 
       try {
         if (foundItem) {
-          diaperProgram.splice(diaperProgram.indexOf(foundItem), 1, {
+          let oldQuantity = foundItem.quantity;
+          let newQuantity = 0;
+          if (oldQuantity - this.quantity! > 0) {
+            newQuantity = oldQuantity - this.quantity!;
+          }
+          let updatedDonation = {
             id: foundItem.id,
-            name: foundItem.name,
+            name: nameLowerCase,
             donator: foundItem.donator,
             program: foundItem.program,
-            quantity: foundItem.quantity + this.quantity!
-          })
+            quantity: newQuantity
+          }
+          diaperProgram.splice(diaperProgram.indexOf(foundItem), 1, updatedDonation)
+          console.log("remaining inventory", updatedDonation)
           return true;
         }
 
