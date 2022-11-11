@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 
 import { v4 as uuidv4 } from "uuid";
 
-import donationRepository from 'src/app/repositories/donation.repository';
-import Donation from 'src/app/models/donation.model';
 import { SAFEProgram } from 'src/app/models/SAFEProgram.type';
 import SAFEProgramsReadable from 'src/app/models/SAFEProgramsReadable.model';
 import foodPantry from 'src/app/repositories/foodPantry.repository';
@@ -14,7 +12,7 @@ import diaperProgram from 'src/app/repositories/diaperProgram.repository';
 @Component({
   selector: 'app-add-donation',
   templateUrl: './add-donation.component.html',
-  styleUrls: ['./add-donation.component.scss']
+  styleUrls: ['../donations.scss']
 })
 export class AddDonationComponent implements OnInit {
 
@@ -40,6 +38,8 @@ export class AddDonationComponent implements OnInit {
       return false;
     }
 
+    let nameLowerCase = this.name!.toLowerCase();
+
     if (this.program === "Period Program") {
 
       //find item
@@ -47,13 +47,20 @@ export class AddDonationComponent implements OnInit {
 
       try {
         if (foundItem) {
-          periodProgram.splice(periodProgram.indexOf(foundItem), 1, {
+          let oldQuantity = foundItem.quantity;
+          let newQuantity = 0;
+          if (oldQuantity + this.quantity! > 0) {
+            newQuantity = Number.parseInt(oldQuantity.toString()) + Number.parseInt(this.quantity!.toString());
+          }
+          let updatedDonation = {
             id: foundItem.id,
-            name: foundItem.name,
+            name: nameLowerCase,
             donator: foundItem.donator,
             program: foundItem.program,
-            quantity: foundItem.quantity + this.quantity!
-          })
+            quantity: newQuantity
+          }
+          periodProgram.splice(periodProgram.indexOf(foundItem), 1, updatedDonation)
+          console.log("remaining inventory", updatedDonation)
           return true;
         }
 
@@ -80,13 +87,20 @@ export class AddDonationComponent implements OnInit {
 
       try {
         if (foundItem) {
-          foodPantry.splice(foodPantry.indexOf(foundItem), 1, {
+          let oldQuantity = foundItem.quantity;
+          let newQuantity = 0;
+          if (oldQuantity + this.quantity! > 0) {
+            newQuantity = Number.parseInt(oldQuantity.toString()) + Number.parseInt(this.quantity!.toString());
+          }
+          let updatedDonation = {
             id: foundItem.id,
-            name: foundItem.name,
+            name: nameLowerCase,
             donator: foundItem.donator,
             program: foundItem.program,
-            quantity: foundItem.quantity + this.quantity!
-          })
+            quantity: newQuantity
+          }
+          foodPantry.splice(foodPantry.indexOf(foundItem), 1, updatedDonation)
+          console.log("remaining inventory", updatedDonation)
           return true;
         }
 
@@ -112,13 +126,20 @@ export class AddDonationComponent implements OnInit {
 
       try {
         if (foundItem) {
-          collegeReadiness.splice(collegeReadiness.indexOf(foundItem), 1, {
+          let oldQuantity = foundItem.quantity;
+          let newQuantity = 0;
+          if (oldQuantity + this.quantity! > 0) {
+            newQuantity = Number.parseInt(oldQuantity.toString()) + Number.parseInt(this.quantity!.toString());
+          }
+          let updatedDonation = {
             id: foundItem.id,
-            name: foundItem.name,
+            name: nameLowerCase,
             donator: foundItem.donator,
             program: foundItem.program,
-            quantity: foundItem.quantity + this.quantity!
-          })
+            quantity: newQuantity
+          }
+          collegeReadiness.splice(collegeReadiness.indexOf(foundItem), 1, updatedDonation)
+          console.log("remaining inventory", updatedDonation)
           return true;
         }
 
@@ -143,13 +164,20 @@ export class AddDonationComponent implements OnInit {
 
       try {
         if (foundItem) {
-          diaperProgram.splice(diaperProgram.indexOf(foundItem), 1, {
+          let oldQuantity = foundItem.quantity;
+          let newQuantity = 0;
+          if (oldQuantity + this.quantity! > 0) {
+            newQuantity = Number.parseInt(oldQuantity.toString()) + Number.parseInt(this.quantity!.toString());
+          }
+          let updatedDonation = {
             id: foundItem.id,
-            name: foundItem.name,
+            name: nameLowerCase,
             donator: foundItem.donator,
             program: foundItem.program,
-            quantity: foundItem.quantity + this.quantity!
-          })
+            quantity: newQuantity
+          }
+          diaperProgram.splice(diaperProgram.indexOf(foundItem), 1, updatedDonation)
+          console.log("remaining inventory", updatedDonation)
           return true;
         }
 

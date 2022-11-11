@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { v4 as uuidv4 } from "uuid";
 
 import Vendor from '../../models/vendor.model'
@@ -19,9 +19,9 @@ export class AddVendorComponent implements OnInit {
 
   vendorForm = new FormGroup({
     name: new FormControl(''),
-    contactFirst: new FormControl(''),
-    contactLast: new FormControl(''),
-    contactPhone: new FormControl(''),
+    contactFirst: new FormControl('', Validators.required),
+    contactLast: new FormControl('', Validators.required),
+    contactPhone: new FormControl('', Validators.required),
   })
 
   constructor() {
@@ -49,7 +49,7 @@ export class AddVendorComponent implements OnInit {
       alert(this.errorMsg);
     } else {
       vendorArr.push(this.vendor);
-
+      // this.vendorCollection.add(this.vendor);
       // console.log(vendorArr.length)
       console.log(vendorArr);
       alert(this.vendor.name + " has been added as a vendor!")

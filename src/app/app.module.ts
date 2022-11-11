@@ -12,6 +12,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatTableModule } from '@angular/material/table';
+import { MatStepperModule } from '@angular/material/stepper';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,6 +23,7 @@ import { FormsModule } from '@angular/forms';
 import { Example } from './components/view-donation/view-donation.component';
 import { AddVendorComponent } from './components/add-vendor/add-vendor.component';
 import { ViewVendorsComponent } from './components/view-vendors/view-vendors.component';
+import { EditVendorComponent } from './components/edit-vendor/edit-vendor.component';
 import { RemoveDonationsComponent } from './components/donations/remove-donations/remove-donations/remove-donations.component';
 
 @NgModule({
@@ -32,9 +34,11 @@ import { RemoveDonationsComponent } from './components/donations/remove-donation
     Example,
     AddVendorComponent,
     ViewVendorsComponent,
+    EditVendorComponent,
     RemoveDonationsComponent
   ],
   exports: [
+    MatStepperModule,
     MatButtonModule,
     MatMenuModule,
     MatToolbarModule,
@@ -45,9 +49,11 @@ import { RemoveDonationsComponent } from './components/donations/remove-donation
     FormsModule,
     MatRadioModule,
     MatSelectModule,
-    MatInputModule
+    MatInputModule,
+    
   ],
   imports: [
+    MatStepperModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
