@@ -1,0 +1,70 @@
+<mat-sidenav-container autosize>
+  <mat-sidenav #sidenav mode="side" opened="isExpanded">
+    <mat-nav-list>
+
+      <mat-list-item (click)="isExpanded = !isExpanded">
+        <mat-icon mat-list-icon class="chevron-button" [ngClass]="{ rotated: isExpanded }">chevron_right
+        </mat-icon>
+      </mat-list-item>
+
+      <mat-list-item [routerLink]="'dashboard'">
+        <mat-icon mat-list-icon>dashboard</mat-icon>
+        <span *ngIf="isExpanded" class="menu-item">Dashboard</span>
+      </mat-list-item>
+
+      <mat-list-item [matMenuTriggerFor]="menu">
+        <mat-icon>call_missed</mat-icon>
+        <span *ngIf="isExpanded" class="menu-item">Received Donations</span>
+      </mat-list-item>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="onSidenavClose()" [routerLink]="'/add-donation'"><mat-icon mat-list-icon>visibility</mat-icon>View Donation</button>
+        <button mat-menu-item (click)="onSidenavClose()"><mat-icon mat-list-icon>add</mat-icon>Add Donation</button>
+        <button mat-menu-item (click)="onSidenavClose()"><mat-icon mat-list-icon>delete</mat-icon>Delete Donation</button>
+      </mat-menu>
+
+      <mat-list-item [routerLink]="'user'">
+        <mat-icon mat-list-icon>send</mat-icon>
+        <span *ngIf="isExpanded" class="menu-item">Sent Donations</span>
+      </mat-list-item>
+
+      <mat-list-item [routerLink]="'user'">
+        <mat-icon mat-list-icon>inbox</mat-icon>
+        <span *ngIf="isExpanded" class="menu-item">Inventory</span>
+      </mat-list-item>
+
+      <mat-list-item [matMenuTriggerFor]="menu">
+        <mat-icon>store</mat-icon>
+        <span *ngIf="isExpanded" class="menu-item">Vendors</span>
+      </mat-list-item>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="onSidenavClose()"><mat-icon mat-list-icon>visibility</mat-icon>View Vendors</button>
+        <button mat-menu-item (click)="onSidenavClose()"><mat-icon mat-list-icon>add</mat-icon>Add Vendors</button>
+      </mat-menu>
+
+      <mat-list-item [routerLink]="'user'">
+        <mat-icon mat-list-icon>settings</mat-icon>
+        <span *ngIf="isExpanded" class="menu-item">Settings</span>
+      </mat-list-item>
+
+      <mat-list-item [routerLink]="'user'">
+        <mat-icon mat-list-icon>exit_to_app</mat-icon>
+        <span *ngIf="isExpanded" class="menu-item">Logout</span>
+      </mat-list-item>
+
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar color="primary" class="app-toolbar">
+      <h4>Inventory Management System</h4>
+      <span class="example-spacer"></span>
+      <mat-form-field class="mat-form-field">
+        <input matInput placeholder="Search...">
+        <button matSuffix mat-button><mat-icon >search</mat-icon></button>
+      </mat-form-field>
+      <mat-icon matBadge="15" matBadgeColor="warn">notifications</mat-icon>
+    </mat-toolbar>
+    <app-view-donation></app-view-donation>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

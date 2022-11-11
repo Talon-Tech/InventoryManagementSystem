@@ -12,6 +12,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatTableModule } from '@angular/material/table';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,6 +24,8 @@ import { Example } from './components/view-donation/view-donation.component';
 import { AddVendorComponent } from './components/add-vendor/add-vendor.component';
 import { ViewVendorsComponent } from './components/view-vendors/view-vendors.component';
 import { RemoveDonationsComponent } from './components/donations/remove-donations/remove-donations/remove-donations.component';
+import { MatListModule } from '@angular/material/list';
+import { ToolBarWSideNavComponent } from './components/tool-bar-w-side-nav/tool-bar-w-side-nav.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,8 @@ import { RemoveDonationsComponent } from './components/donations/remove-donation
     Example,
     AddVendorComponent,
     ViewVendorsComponent,
-    RemoveDonationsComponent
+    RemoveDonationsComponent,
+    ToolBarWSideNavComponent
   ],
   exports: [
     MatButtonModule,
@@ -45,7 +49,9 @@ import { RemoveDonationsComponent } from './components/donations/remove-donation
     FormsModule,
     MatRadioModule,
     MatSelectModule,
-    MatInputModule
+    MatInputModule,
+    MatSidenavModule,
+    MatListModule
   ],
   imports: [
     BrowserModule,
@@ -64,7 +70,9 @@ import { RemoveDonationsComponent } from './components/donations/remove-donation
     MatSelectModule,
     FormsModule,
     MatTableModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatSidenavModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
