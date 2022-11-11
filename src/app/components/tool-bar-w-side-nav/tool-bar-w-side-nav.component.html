@@ -7,7 +7,7 @@
         </mat-icon>
       </mat-list-item>
 
-      <mat-list-item [routerLink]="'dashboard'">
+      <mat-list-item [routerLink]="'view-donations'">
         <mat-icon mat-list-icon>dashboard</mat-icon>
         <span *ngIf="isExpanded" class="menu-item">Dashboard</span>
       </mat-list-item>
@@ -64,7 +64,6 @@
       </mat-form-field>
       <mat-icon matBadge="15" matBadgeColor="warn">notifications</mat-icon>
     </mat-toolbar>
-    <app-view-donation></app-view-donation>
   </mat-sidenav-content>
 
 </mat-sidenav-container>
