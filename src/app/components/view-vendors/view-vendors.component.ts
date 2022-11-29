@@ -1,52 +1,31 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { DataSource } from '@angular/cdk/collections';
-import { Observable, ReplaySubject } from 'rxjs';
+import { Component, AfterViewInit } from '@angular/core';
 
 import { VendorsvcService } from 'src/app/services/vendorsvc.service';
-import Vendor from 'src/app/models/vendor.model';
-import vendorArr from 'src/app/repositories/vendor.repository';
-
-const ELEMENT_DATA: Vendor[] = vendorArr; 
+import { DbService } from 'src/app/services/db.service';
 
 @Component({
   selector: 'app-view-vendors',
   templateUrl: './view-vendors.component.html',
   styleUrls: ['./view-vendors.component.scss']
 })
-export class ViewVendorsComponent {
 
+export class ViewVendorsComponent implements AfterViewInit {
   displayedColumns: string[] = ['id', 'name', 'contactFirst', 'contactLast', 'contactPhone', 'editIcon', 'deleteIcon'];
-  dataToDisplay = [...ELEMENT_DATA];
-  dataSource = new ExampleDataSource(this.dataToDisplay);
+  dataSource!: any;
 
-  constructor(private vendorSvs: VendorsvcService) { }
+  constructor(private vendorSvc: VendorsvcService, private dbSvc: DbService) { }
 
-  delete(id: any) {
+  async ngAfterViewInit() {
+    let vendorCollection = await this.vendorSvc.GetVendors();
+    this.dataSource = vendorCollection;
+  }
+
+  async delete(id: any) {
     let result = confirm("Are you sure you want to delete?");
     if (result) {
-      this.vendorSvs.DeleteVendor(id);
-      this.dataToDisplay = vendorArr; 
-      this.dataSource.setData(this.dataToDisplay);
+      await this.vendorSvc.DeleteVendor(id);
+      window.location.reload();
     }
-  }
-}
-
-class ExampleDataSource extends DataSource<Vendor> {
-  private _dataStream = new ReplaySubject<Vendor[]>();
-
-  constructor(initialData: Vendor[]) {
-    super();
-    this.setData(initialData);
-  }
-
-  connect(): Observable<Vendor[]> {
-    return this._dataStream;
-  }
-
-  disconnect() {}
-
-  setData(data: Vendor[]) {
-    this._dataStream.next(data);
   }
 }
 
