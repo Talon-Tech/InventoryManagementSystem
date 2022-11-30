@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { v4 as uuidv4 } from "uuid";
 
 import Vendor from '../../models/vendor.model'
-import vendorArr from '../../repositories/vendor.repository';
+import { VendorsvcService } from 'src/app/services/vendorsvc.service';
 
 
 @Component({
@@ -12,10 +11,9 @@ import vendorArr from '../../repositories/vendor.repository';
   styleUrls: ['./add-vendor.component.scss']
 })
 export class AddVendorComponent implements OnInit {
+  vendor = <Vendor>{};
   error = false;
   errorMsg = "Please complete the required information";
-
-  vendor = <Vendor>{};
 
   vendorForm = new FormGroup({
     name: new FormControl(''),
@@ -24,7 +22,7 @@ export class AddVendorComponent implements OnInit {
     contactPhone: new FormControl('', Validators.required),
   })
 
-  constructor() {
+  constructor(private vendorSvc: VendorsvcService) {
     this.onChanges();
   }
 
@@ -33,8 +31,6 @@ export class AddVendorComponent implements OnInit {
 
   onChanges() {
     this.vendorForm!.valueChanges.subscribe(val => {
-      // this.shirt.id = this.afs.createId();
-      this.vendor.id = uuidv4();
       this.vendor.name = val.name!;
       this.vendor.contactFirst = val.contactFirst!;
       this.vendor.contactLast = val.contactLast!;
@@ -45,13 +41,9 @@ export class AddVendorComponent implements OnInit {
   onSubmit() {
     if (this.vendor.name == undefined || this.vendor.contactFirst == undefined || this.vendor.contactLast == undefined || this.vendor.contactPhone == undefined) {
       this.error = true;
-      // this.errorMsg = "Please complete the required information";
       alert(this.errorMsg);
     } else {
-      vendorArr.push(this.vendor);
-      // this.vendorCollection.add(this.vendor);
-      // console.log(vendorArr.length)
-      console.log(vendorArr);
+      this.vendorSvc.AddVendor(this.vendor);
       alert(this.vendor.name + " has been added as a vendor!")
       // this.vendorForm.reset();
     }

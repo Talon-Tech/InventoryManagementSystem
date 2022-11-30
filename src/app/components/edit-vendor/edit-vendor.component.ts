@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 
 import Vendor from '../../models/vendor.model'
-import vendorArr from '../../repositories/vendor.repository';
 import { VendorsvcService } from '../../services/vendorsvc.service';
 
 @Component({
@@ -15,19 +14,11 @@ export class EditVendorComponent implements OnInit {
 
   public vendorForm!: FormGroup;
   vendorId: number | null | undefined;
-  vendor = <Vendor>{};
+  vendor = <any>{};
   error = false;
   errorMsg = '';
 
   constructor(private activatedRoute: ActivatedRoute, private vendorSvc: VendorsvcService, private formBuilder: FormBuilder) {
-
-    this.activatedRoute.params.subscribe((p) => {
-      this.vendorId = p['id'];
-      console.log(this.vendorId);
-    });
-
-    this.vendor = this.vendorSvc.GetVendor(this.vendorId)!;
-
     // Create FormGroup
     this.vendorForm = this.formBuilder.group({
       "name": [""],
@@ -35,6 +26,14 @@ export class EditVendorComponent implements OnInit {
       "contactLast": [""],
       "contactPhone": [""],
     })
+  }
+
+  async ngOnInit() {
+    this.activatedRoute.params.subscribe((p) => {
+      this.vendorId = p['id'];
+    });
+
+    this.vendor = await this.vendorSvc.GetVendor(this.vendorId);
 
     // Set Values
     this.vendorForm.controls["name"].setValue(this.vendor.name);
@@ -44,8 +43,6 @@ export class EditVendorComponent implements OnInit {
 
     this.onChanges();
   }
-
-  ngOnInit(): void { }
 
   onChanges() {
     this.vendorForm!.valueChanges.subscribe(val => {
@@ -57,7 +54,6 @@ export class EditVendorComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.vendor);
     try {
       this.vendorSvc.UpdateVendor(this.vendor);
       console.log("success");
