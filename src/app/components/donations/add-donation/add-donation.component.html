@@ -1,26 +1,33 @@
 <mat-card class="addDonation flex-container bgDark bLight">
-    <div class="flex-container center column bgDark mM pM">
         <p>Add a Donation</p>
-        <div class="flex-container center bLight pM">
-            <div class="flex-container column center mM">
-                <mat-label>Name:</mat-label>
-                <mat-label>Quantity:</mat-label>
-                <mat-label>Vendor:</mat-label>
-                <mat-label>Program:</mat-label>
-            </div>
-            <div class="flex-container column center mM">
-                <input type="text" [(ngModel)]="name">
-                <input type="text" [(ngModel)]="quantity">
-                <input type="text" [(ngModel)]="donator">
-                <mat-select class="mat-select-content" [(ngModel)]="program" aria-label="Select an option">
-                    <mat-option *ngFor="let SAFEProgram of programs" [value]="SAFEProgram">
-                        {{SAFEProgram}}
-                    </mat-option>
-                </mat-select>
-            </div>
-            <button class="center" mat-mini-fab color="primary" aria-label="Example icon button with a delete icon" (click)="addDonation()">
-                <mat-icon fontIcon="add_circle"></mat-icon>
-            </button>
-        </div>
-    </div>
+            <form [formGroup]="addDonationForm" (ngSubmit)="onSubmitAddDonation()">
+                <mat-form-field>
+                    <mat-select (selectionChange)="onProgramSelect($event)" formControlName="program"
+                        placeholder="Select a Program">
+                        <mat-option *ngFor="let programItem of programs" [value]="programItem">{{programItem}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-select (selectionChange)="onVendorSelect($event)" formControlName="vendor"
+                        placeholder="Select a Vendor">
+                        <mat-option *ngFor="let vendorItem of vendors" [value]="vendorItem.name">{{vendorItem.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-select #donationSelect (selectionChange)="onDonationNameSelect($event)" formControlName="donation"
+                        placeholder="Select a Donantion">
+                        <mat-option *ngFor="let donationItem of filteredDonations" [value]="donationItem">
+                            {{donationItem.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field *ngIf="donationSelect.value">
+                    <input [value]="quantity" matInput readonly placeholder="Current Donation Quantity">
+                </mat-form-field>
+                <mat-form-field *ngIf="donationSelect.value">
+                    <input type="number" min="0" formControlName="quantity" matInput placeholder="Amount to Add">
+                </mat-form-field>
+                    <button *ngIf="donationSelect.value" type="submit">Add</button>
+            </form>
 </mat-card>

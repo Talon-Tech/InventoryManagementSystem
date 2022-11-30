@@ -38,7 +38,7 @@ export class AppComponent implements OnInit {
       else
       {
         this.currentUser=undefined;
-        this.router.navigate(['/']);
+        this.router.navigate(['/add-donation']);
       }
     });
   }

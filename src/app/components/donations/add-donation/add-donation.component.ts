@@ -8,6 +8,11 @@ import foodPantry from 'src/app/repositories/foodPantry.repository';
 import periodProgram from 'src/app/repositories/periodProgam.repository';
 import collegeReadiness from 'src/app/repositories/collegeReadiness.repository';
 import diaperProgram from 'src/app/repositories/diaperProgram.repository';
+import { FormControl, FormGroup } from '@angular/forms';
+import { VendorsvcService } from 'src/app/services/vendorsvc.service';
+import Vendor from 'src/app/models/vendor.model';
+import Donation from 'src/app/models/donation.model';
+import { DonationService } from 'src/app/services/donation.service';
 
 @Component({
   selector: 'app-add-donation',
@@ -16,19 +21,56 @@ import diaperProgram from 'src/app/repositories/diaperProgram.repository';
 })
 export class AddDonationComponent implements OnInit {
 
-  constructor() { }
+  constructor(private vendorSvs: VendorsvcService, private donationService: DonationService) { }
 
   ngOnInit(): void {
+    this.vendors = this.vendorSvs.GetVendors();
+    this.allDonations = this.donationService.GetDonations();
+    this.filteredDonations = this.allDonations;
   }
 
+  addDonationForm = new FormGroup({
+    donation: new FormControl(''),
+    vendor: new FormControl(''),
+    program: new FormControl(''),
+    quantity: new FormControl(''),
+  });
+
   public name?: string;
-  public donator?: string;
+  public vendors?: Array<Vendor>
+  public allDonations?: Array<Donation>
+  public filteredDonations?: Array<Donation> = []
+  public vendor?: string;
   public program?: SAFEProgram;
   public quantity?: number;
   public programs: Array<string> = SAFEProgramsReadable;
 
+  onVendorSelect = (event: any) => {
+    let selectedVendor = event;
+    console.log(selectedVendor)
+    this.filteredDonations = this.allDonations?.filter(donation => donation.vendor === selectedVendor.value)
+    console.log(this.filteredDonations)
+  }
+
+  onProgramSelect = (event: any) => {
+    let selectedProgram = event;
+    console.log(selectedProgram)
+    this.filteredDonations = this.allDonations?.filter(donation => donation.program === selectedProgram.value)
+    console.log(selectedProgram)
+  }
+
+  onDonationNameSelect = (event: any) => {
+    let selectedDonation = event.value;
+    this.quantity = selectedDonation.quantity
+    console.log(selectedDonation)
+  }
+
   validateDonation = (): boolean => {
-    return this.name && this.donator && this.program && this.quantity ? false : true;
+    return this.name && this.vendor && this.program && this.quantity ? false : true;
+  }
+
+  onSubmitAddDonation() {
+    console.log(this.addDonationForm)
   }
 
   public addDonation = (): boolean => {
@@ -55,7 +97,7 @@ export class AddDonationComponent implements OnInit {
           let updatedDonation = {
             id: foundItem.id,
             name: nameLowerCase,
-            donator: foundItem.donator,
+            vendor: foundItem.vendor,
             program: foundItem.program,
             quantity: newQuantity
           }
@@ -67,7 +109,7 @@ export class AddDonationComponent implements OnInit {
         periodProgram.push({
           id: uuidv4(),
           name: this.name!,
-          donator: this.donator!,
+          vendor: this.vendor!,
           program: this.program!,
           quantity: this.quantity!
         });
@@ -95,7 +137,7 @@ export class AddDonationComponent implements OnInit {
           let updatedDonation = {
             id: foundItem.id,
             name: nameLowerCase,
-            donator: foundItem.donator,
+            vendor: foundItem.vendor,
             program: foundItem.program,
             quantity: newQuantity
           }
@@ -107,7 +149,7 @@ export class AddDonationComponent implements OnInit {
         foodPantry.push({
           id: uuidv4(),
           name: this.name!,
-          donator: this.donator!,
+          vendor: this.vendor!,
           program: this.program!,
           quantity: this.quantity!
         });
@@ -134,7 +176,7 @@ export class AddDonationComponent implements OnInit {
           let updatedDonation = {
             id: foundItem.id,
             name: nameLowerCase,
-            donator: foundItem.donator,
+            vendor: foundItem.vendor,
             program: foundItem.program,
             quantity: newQuantity
           }
@@ -146,7 +188,7 @@ export class AddDonationComponent implements OnInit {
         collegeReadiness.push({
           id: uuidv4(),
           name: this.name!,
-          donator: this.donator!,
+          vendor: this.vendor!,
           program: this.program!,
           quantity: this.quantity!
         });
@@ -172,7 +214,7 @@ export class AddDonationComponent implements OnInit {
           let updatedDonation = {
             id: foundItem.id,
             name: nameLowerCase,
-            donator: foundItem.donator,
+            vendor: foundItem.vendor,
             program: foundItem.program,
             quantity: newQuantity
           }
@@ -184,7 +226,7 @@ export class AddDonationComponent implements OnInit {
         diaperProgram.push({
           id: uuidv4(),
           name: this.name!,
-          donator: this.donator!,
+          vendor: this.vendor!,
           program: this.program!,
           quantity: this.quantity!
         });

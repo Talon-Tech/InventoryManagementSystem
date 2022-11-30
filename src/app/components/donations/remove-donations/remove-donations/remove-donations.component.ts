@@ -26,7 +26,7 @@ export class RemoveDonationsComponent implements OnInit {
   }
 
   public name?: string;
-  public donator?: string;
+  public vendor?: string;
   public vendors?: Array<Vendor> = vendorArr;
   public program?: SAFEProgram;
   public quantity?: number;
@@ -36,7 +36,7 @@ export class RemoveDonationsComponent implements OnInit {
   validateDonation = (): boolean => {
     if (this.quantity && this.quantity < 0)
       return false;
-    return this.name && this.donator && this.program && this.quantity ? false : true;
+    return this.name && this.vendor && this.program && this.quantity ? false : true;
   }
 
   public removeDonation = (): boolean => {
@@ -63,7 +63,7 @@ export class RemoveDonationsComponent implements OnInit {
           let updatedDonation = {
             id: foundItem.id,
             name: nameLowerCase,
-            donator: foundItem.donator,
+            vendor: foundItem.vendor,
             program: foundItem.program,
             quantity: newQuantity
           }
@@ -96,7 +96,7 @@ export class RemoveDonationsComponent implements OnInit {
           let updatedDonation = {
             id: foundItem.id,
             name: nameLowerCase,
-            donator: foundItem.donator,
+            vendor: foundItem.vendor,
             program: foundItem.program,
             quantity: newQuantity
           }
@@ -127,7 +127,7 @@ export class RemoveDonationsComponent implements OnInit {
           let updatedDonation = {
             id: foundItem.id,
             name: nameLowerCase,
-            donator: foundItem.donator,
+            vendor: foundItem.vendor,
             program: foundItem.program,
             quantity: newQuantity
           }
@@ -158,7 +158,7 @@ export class RemoveDonationsComponent implements OnInit {
           let updatedDonation = {
             id: foundItem.id,
             name: nameLowerCase,
-            donator: foundItem.donator,
+            vendor: foundItem.vendor,
             program: foundItem.program,
             quantity: newQuantity
           }

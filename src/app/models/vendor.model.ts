@@ -4,4 +4,5 @@ export default interface Vendor {
     contactFirst: string;
     contactLast: string;
     contactPhone: string;
+    program?: string
 }

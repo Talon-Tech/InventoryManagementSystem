@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AddDonationComponent } from './components/donations/add-donation/add-donation.component';
 import { LoginComponent } from './components/login/login.component';
-import { Example } from './components/view-donation/view-donation.component';
+import { Example } from './components/donations/view-donation/view-donation.component';
 import { AddVendorComponent } from './components/add-vendor/add-vendor.component';
 import { ViewVendorsComponent } from './components/view-vendors/view-vendors.component';
 import { AuthGService } from './services/auth-g.service';

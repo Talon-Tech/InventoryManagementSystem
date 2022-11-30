@@ -1,0 +1,20 @@
+<div>
+<p>
+    Create a Donation
+</p>
+<form [formGroup]="validationForm">
+    <mat-form-field>
+        <input formControlName="name" matInput placeholder="Donation Name" required>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-select formControlName="vendor" placeholder="Select Vendor">
+            <mat-option *ngFor="let vendorItem of vendors" value="vendorItem.name">{{vendorItem.name}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-select formControlName="program" placeholder="Select Program">
+            <mat-option *ngFor="let programItem of programs" value="programItem">{{programItem}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+</form>
+</div>
