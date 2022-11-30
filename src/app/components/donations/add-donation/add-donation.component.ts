@@ -23,9 +23,9 @@ export class AddDonationComponent implements OnInit {
 
   constructor(private vendorSvs: VendorsvcService, private donationService: DonationService) { }
 
-  ngOnInit(): void {
-    this.vendors = this.vendorSvs.GetVendors();
-    this.allDonations = this.donationService.GetDonations();
+  async ngOnInit(): Promise<void> {
+    this.vendors = await this.vendorSvs.GetVendors();
+    this.allDonations = await this.donationService.GetDonations();
     this.filteredDonations = this.allDonations;
   }
 
@@ -37,8 +37,8 @@ export class AddDonationComponent implements OnInit {
   });
 
   public name?: string;
-  public vendors?: Array<Vendor>
-  public allDonations?: Array<Donation>
+  public vendors?: any
+  public allDonations?: any
   public filteredDonations?: Array<Donation> = []
   public vendor?: string;
   public program?: SAFEProgram;
@@ -48,14 +48,14 @@ export class AddDonationComponent implements OnInit {
   onVendorSelect = (event: any) => {
     let selectedVendor = event;
     console.log(selectedVendor)
-    this.filteredDonations = this.allDonations?.filter(donation => donation.vendor === selectedVendor.value)
+    this.filteredDonations = this.allDonations?.filter((donation: { vendor: any; }) => donation.vendor === selectedVendor.value)
     console.log(this.filteredDonations)
   }
 
   onProgramSelect = (event: any) => {
     let selectedProgram = event;
     console.log(selectedProgram)
-    this.filteredDonations = this.allDonations?.filter(donation => donation.program === selectedProgram.value)
+    this.filteredDonations = this.allDonations?.filter((donation: { program: any; }) => donation.program === selectedProgram.value)
     console.log(selectedProgram)
   }
 
@@ -69,8 +69,14 @@ export class AddDonationComponent implements OnInit {
     return this.name && this.vendor && this.program && this.quantity ? false : true;
   }
 
-  onSubmitAddDonation() {
+  async onSubmitAddDonation() {
     console.log(this.addDonationForm)
+
+    if (await this.donationService.GetDonations().then(res => res.find(donation => donation['name'] === this.addDonationForm.value.donation))) {
+      debugger;
+      return;
+    }
+    debugger
   }
 
   public addDonation = (): boolean => {

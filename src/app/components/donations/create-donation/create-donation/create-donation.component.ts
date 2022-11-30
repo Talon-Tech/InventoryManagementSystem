@@ -12,7 +12,7 @@ import { VendorsvcService } from 'src/app/services/vendorsvc.service';
 })
 export class CreateDonationComponent implements OnInit {
 
-  vendors!: Vendor[];
+  vendors!: any;
   programs!: any[];
 
   validationForm!: FormGroup;
