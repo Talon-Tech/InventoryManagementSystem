@@ -4,6 +4,7 @@ import { DocumentData, collection, doc, getDoc, getDocs, query, where, FieldPath
 import { addDoc, updateDoc, deleteDoc } from 'firebase/firestore/lite';
 import { DbService } from 'src/app/services/db.service';
 import Donation from '../models/donation.model';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable({
   providedIn: 'root'
@@ -35,7 +36,7 @@ export class DonationService {
   async AddDonation(donation: Donation) {
     const docRef = await addDoc(this.donationCollection,
     {
-      // id: uuidv4(),
+      id: uuidv4(),
       name: donation.name,
       quantity: donation.quantity,
       program: donation.program,
@@ -50,14 +51,35 @@ export class DonationService {
   }
 
   async UpdateDonation(donation: Donation) {
-    const donationRef = doc(this.dbRef, "donations", donation.id);
-    await updateDoc(donationRef, {
-      name: donation.name, 
-      quantity: donation.quantity,
-      program: donation.program,
-      vendor: donation.vendor,
-      donationDate: donation.donationDate 
-    });
+    //const donationRef = doc(this.dbRef, this.donationCollection.id);
+    getDocs(this.donationCollection)
+      .then(async (snapshot) => {
+        
+        let allDocs: any[] = [];
+        
+        snapshot.docs.forEach(document => {
+          allDocs
+            .push(
+              {
+                data: document.data(),
+                ref: document.ref
+              }
+            )
+        });
+        let foundDonation = allDocs.find(doc => donation.name === doc.data.name);
+
+        console.log(foundDonation, "foundDonation")
+
+        await updateDoc(foundDonation.ref, {
+          name: donation.name, 
+          quantity: donation.quantity,
+          program: donation.program,
+          vendor: donation.vendor,
+          donationDate: donation.donationDate 
+        });
+        
+      })
+    
   }
 
   async DeleteDonation(id: any) {

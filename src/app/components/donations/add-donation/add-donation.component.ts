@@ -30,7 +30,7 @@ export class AddDonationComponent implements OnInit {
   }
 
   addDonationForm = new FormGroup({
-    donation: new FormControl(''),
+    donation: new FormControl(<Donation>{}),
     vendor: new FormControl(''),
     program: new FormControl(''),
     quantity: new FormControl(''),
@@ -38,12 +38,14 @@ export class AddDonationComponent implements OnInit {
 
   public name?: string;
   public vendors?: any
-  public allDonations?: any
+  public allDonations?: any[]
   public filteredDonations?: Array<Donation> = []
   public vendor?: string;
   public program?: SAFEProgram;
   public quantity?: number;
   public programs: Array<string> = SAFEProgramsReadable;
+  
+  isDonationSelected: boolean = false;
 
   onVendorSelect = (event: any) => {
     let selectedVendor = event;
@@ -62,6 +64,7 @@ export class AddDonationComponent implements OnInit {
   onDonationNameSelect = (event: any) => {
     let selectedDonation = event.value;
     this.quantity = selectedDonation.quantity
+    this.isDonationSelected = true;
     console.log(selectedDonation)
   }
 
@@ -72,11 +75,37 @@ export class AddDonationComponent implements OnInit {
   async onSubmitAddDonation() {
     console.log(this.addDonationForm)
 
-    if (await this.donationService.GetDonations().then(res => res.find(donation => donation['name'] === this.addDonationForm.value.donation))) {
-      debugger;
+    let foundDonation: Donation = this.allDonations?.find(donation => donation.name === this.addDonationForm.value.donation!.name) //await this.donationService.GetDonations().then(res => res.find(donation => donation['name'] === this.addDonationForm.value.donation))
+
+    if (foundDonation) {
+      let newQuantity = Number.parseInt(foundDonation.quantity.toString()) + Number.parseInt(this.addDonationForm.value.quantity!.toString());
+      
+      let updatedDonation = <Donation> {
+        id: foundDonation.id,
+        name: foundDonation.name,
+        quantity: newQuantity,
+        program: foundDonation.program,
+        vendor: foundDonation.vendor,
+        donationDate: foundDonation.donationDate
+      }
+
+      this.donationService.UpdateDonation(updatedDonation)
+
       return;
     }
-    debugger
+
+    let newDonationToAdd = <Donation> {
+      id: uuidv4(),
+      name: this.addDonationForm.value.donation!.name,
+      quantity: this.addDonationForm.value.donation!.quantity,
+      program: this.addDonationForm.value.donation!.program,
+      vendor: this.addDonationForm.value.donation!.vendor,
+      donationDate: new Date().toUTCString()
+    }
+
+    this.donationService.AddDonation(newDonationToAdd);
+
+    return;
   }
 
   public addDonation = (): boolean => {
