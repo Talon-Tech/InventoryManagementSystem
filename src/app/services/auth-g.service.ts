@@ -17,7 +17,7 @@ export class AuthGService implements CanActivate{
     }
     else
     {
-      this.router.navigate(['/Login']);
+      this.router.navigate(['/login']);
       return false;
     }
   }

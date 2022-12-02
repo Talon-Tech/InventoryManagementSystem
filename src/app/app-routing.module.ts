@@ -18,7 +18,7 @@ const routes: Routes = [
   {
     path: 'add-donation',
     component: AddDonationComponent,
-    canActivate:[AuthGService]
+    //canActivate:[AuthGService]
   },
   {
     path: 'remove-donation',

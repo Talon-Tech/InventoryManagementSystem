@@ -51,8 +51,10 @@ export class DonationService {
   }
 
   async UpdateDonation(donation: Donation) {
-    //const donationRef = doc(this.dbRef, this.donationCollection.id);
-    getDocs(this.donationCollection)
+
+    let theNewDonation: any;
+
+    await getDocs(this.donationCollection)
       .then(async (snapshot) => {
         
         let allDocs: any[] = [];
@@ -70,15 +72,20 @@ export class DonationService {
 
         console.log(foundDonation, "foundDonation")
 
-        await updateDoc(foundDonation.ref, {
+        theNewDonation = {
           name: donation.name, 
           quantity: donation.quantity,
           program: donation.program,
           vendor: donation.vendor,
           donationDate: donation.donationDate 
+        }
+
+        await updateDoc(foundDonation.ref, theNewDonation).then(() => {
+          window.alert(`Donation successful! There ${theNewDonation.quantity > 1 ? "are" : "is"} now ${theNewDonation.quantity} ${theNewDonation.name} in inventory.`);
+          window.location.reload()
         });
         
-      })
+      })      
     
   }
 

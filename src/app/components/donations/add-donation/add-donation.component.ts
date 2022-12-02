@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
 import { v4 as uuidv4 } from "uuid";
-
 import { SAFEProgram } from 'src/app/models/SAFEProgram.type';
 import SAFEProgramsReadable from 'src/app/models/SAFEProgramsReadable.model';
 import foodPantry from 'src/app/repositories/foodPantry.repository';
@@ -14,6 +12,7 @@ import Vendor from 'src/app/models/vendor.model';
 import Donation from 'src/app/models/donation.model';
 import { DonationService } from 'src/app/services/donation.service';
 
+
 @Component({
   selector: 'app-add-donation',
   templateUrl: './add-donation.component.html',
@@ -21,7 +20,10 @@ import { DonationService } from 'src/app/services/donation.service';
 })
 export class AddDonationComponent implements OnInit {
 
-  constructor(private vendorSvs: VendorsvcService, private donationService: DonationService) { }
+  constructor(
+    private vendorSvs: VendorsvcService,
+    private donationService: DonationService
+  ) { }
 
   async ngOnInit(): Promise<void> {
     this.vendors = await this.vendorSvs.GetVendors();
@@ -30,7 +32,7 @@ export class AddDonationComponent implements OnInit {
   }
 
   addDonationForm = new FormGroup({
-    donation: new FormControl(<Donation>{}),
+    donation: new FormControl(),
     vendor: new FormControl(''),
     program: new FormControl(''),
     quantity: new FormControl(''),
@@ -44,7 +46,7 @@ export class AddDonationComponent implements OnInit {
   public program?: SAFEProgram;
   public quantity?: number;
   public programs: Array<string> = SAFEProgramsReadable;
-  
+
   isDonationSelected: boolean = false;
 
   onVendorSelect = (event: any) => {
@@ -73,14 +75,13 @@ export class AddDonationComponent implements OnInit {
   }
 
   async onSubmitAddDonation() {
-    console.log(this.addDonationForm)
 
-    let foundDonation: Donation = this.allDonations?.find(donation => donation.name === this.addDonationForm.value.donation!.name) //await this.donationService.GetDonations().then(res => res.find(donation => donation['name'] === this.addDonationForm.value.donation))
+    let foundDonation = this.allDonations?.find(donation => donation.name === this.addDonationForm.value.donation!.name) //await this.donationService.GetDonations().then(res => res.find(donation => donation['name'] === this.addDonationForm.value.donation))
 
     if (foundDonation) {
       let newQuantity = Number.parseInt(foundDonation.quantity.toString()) + Number.parseInt(this.addDonationForm.value.quantity!.toString());
-      
-      let updatedDonation = <Donation> {
+
+      let updatedDonation = {
         id: foundDonation.id,
         name: foundDonation.name,
         quantity: newQuantity,
@@ -94,7 +95,7 @@ export class AddDonationComponent implements OnInit {
       return;
     }
 
-    let newDonationToAdd = <Donation> {
+    let newDonationToAdd = {
       id: uuidv4(),
       name: this.addDonationForm.value.donation!.name,
       quantity: this.addDonationForm.value.donation!.quantity,
@@ -103,180 +104,15 @@ export class AddDonationComponent implements OnInit {
       donationDate: new Date().toUTCString()
     }
 
-    this.donationService.AddDonation(newDonationToAdd);
+    this.addDonationForm.reset()
+
+    await this.donationService.AddDonation(newDonationToAdd);
+
+    // this.quantity = newDonationToAdd.quantity;
+
+    // window.alert(`You added ${this.addDonationForm.value.quantity} to ${this.addDonationForm.value.donation?.name}'s inventory`);
 
     return;
-  }
-
-  public addDonation = (): boolean => {
-    let errors = this.validateDonation();
-
-    if (errors) {
-      return false;
-    }
-
-    let nameLowerCase = this.name!.toLowerCase();
-
-    if (this.program === "Period Program") {
-
-      //find item
-      let foundItem = periodProgram.find(item => item.name === this.name);
-
-      try {
-        if (foundItem) {
-          let oldQuantity = foundItem.quantity;
-          let newQuantity = 0;
-          if (oldQuantity + this.quantity! > 0) {
-            newQuantity = Number.parseInt(oldQuantity.toString()) + Number.parseInt(this.quantity!.toString());
-          }
-          let updatedDonation = {
-            id: foundItem.id,
-            name: nameLowerCase,
-            vendor: foundItem.vendor,
-            program: foundItem.program,
-            quantity: newQuantity
-          }
-          periodProgram.splice(periodProgram.indexOf(foundItem), 1, updatedDonation)
-          console.log("remaining inventory", updatedDonation)
-          return true;
-        }
-
-        periodProgram.push({
-          id: uuidv4(),
-          name: this.name!,
-          vendor: this.vendor!,
-          program: this.program!,
-          quantity: this.quantity!
-        });
-
-        return true;
-      } catch (error) {
-        console.log(error);
-
-        return false;
-      }
-    }
-
-    if (this.program === "Food Pantry") {
-
-      //find item
-      let foundItem = foodPantry.find(item => item.name === this.name);
-
-      try {
-        if (foundItem) {
-          let oldQuantity = foundItem.quantity;
-          let newQuantity = 0;
-          if (oldQuantity + this.quantity! > 0) {
-            newQuantity = Number.parseInt(oldQuantity.toString()) + Number.parseInt(this.quantity!.toString());
-          }
-          let updatedDonation = {
-            id: foundItem.id,
-            name: nameLowerCase,
-            vendor: foundItem.vendor,
-            program: foundItem.program,
-            quantity: newQuantity
-          }
-          foodPantry.splice(foodPantry.indexOf(foundItem), 1, updatedDonation)
-          console.log("remaining inventory", updatedDonation)
-          return true;
-        }
-
-        foodPantry.push({
-          id: uuidv4(),
-          name: this.name!,
-          vendor: this.vendor!,
-          program: this.program!,
-          quantity: this.quantity!
-        });
-
-        return true;
-      } catch (error) {
-        console.log(error);
-
-        return false;
-      }
-    }
-
-    if (this.program === "College Readiness") {
-      //find item
-      let foundItem = collegeReadiness.find(item => item.name === this.name);
-
-      try {
-        if (foundItem) {
-          let oldQuantity = foundItem.quantity;
-          let newQuantity = 0;
-          if (oldQuantity + this.quantity! > 0) {
-            newQuantity = Number.parseInt(oldQuantity.toString()) + Number.parseInt(this.quantity!.toString());
-          }
-          let updatedDonation = {
-            id: foundItem.id,
-            name: nameLowerCase,
-            vendor: foundItem.vendor,
-            program: foundItem.program,
-            quantity: newQuantity
-          }
-          collegeReadiness.splice(collegeReadiness.indexOf(foundItem), 1, updatedDonation)
-          console.log("remaining inventory", updatedDonation)
-          return true;
-        }
-
-        collegeReadiness.push({
-          id: uuidv4(),
-          name: this.name!,
-          vendor: this.vendor!,
-          program: this.program!,
-          quantity: this.quantity!
-        });
-
-        return true;
-      } catch (error) {
-        console.log(error);
-
-        return false;
-      }
-    }
-
-    if (this.program === "Diaper Program") {
-      let foundItem = diaperProgram.find(item => item.name === this.name);
-
-      try {
-        if (foundItem) {
-          let oldQuantity = foundItem.quantity;
-          let newQuantity = 0;
-          if (oldQuantity + this.quantity! > 0) {
-            newQuantity = Number.parseInt(oldQuantity.toString()) + Number.parseInt(this.quantity!.toString());
-          }
-          let updatedDonation = {
-            id: foundItem.id,
-            name: nameLowerCase,
-            vendor: foundItem.vendor,
-            program: foundItem.program,
-            quantity: newQuantity
-          }
-          diaperProgram.splice(diaperProgram.indexOf(foundItem), 1, updatedDonation)
-          console.log("remaining inventory", updatedDonation)
-          return true;
-        }
-
-        diaperProgram.push({
-          id: uuidv4(),
-          name: this.name!,
-          vendor: this.vendor!,
-          program: this.program!,
-          quantity: this.quantity!
-        });
-
-        return true;
-      } catch (error) {
-        console.log(error);
-
-        return false;
-      }
-    }
-
-    // something went wrong
-    return false;
-
   }
 
 
