@@ -11,6 +11,7 @@ import { VendorsvcService } from 'src/app/services/vendorsvc.service';
 import Vendor from 'src/app/models/vendor.model';
 import Donation from 'src/app/models/donation.model';
 import { DonationService } from 'src/app/services/donation.service';
+import { combineLatest, startWith, tap } from 'rxjs';
 
 
 @Component({
@@ -29,6 +30,20 @@ export class AddDonationComponent implements OnInit {
     this.vendors = await this.vendorSvs.GetVendors();
     this.allDonations = await this.donationService.GetDonations();
     this.filteredDonations = this.allDonations;
+
+    let _programControl = this.addDonationForm.controls.program
+    let _vendorControl = this.addDonationForm.controls.vendor
+
+    let programChanges$ = _programControl.valueChanges
+    let vendorChanges$ = _vendorControl.valueChanges
+
+    combineLatest([programChanges$, vendorChanges$]).pipe(
+      tap(([programName, vendorName]) => {
+        this.filteredDonations = this.allDonations?.filter(don => don.vendor === vendorName);
+        this.filteredDonations = this.filteredDonations?.filter(don => don.program === programName)
+        console.log(this.filteredDonations)
+      })
+    ).subscribe()
   }
 
   addDonationForm = new FormGroup({
@@ -51,23 +66,18 @@ export class AddDonationComponent implements OnInit {
 
   onVendorSelect = (event: any) => {
     let selectedVendor = event;
-    console.log(selectedVendor)
     this.filteredDonations = this.allDonations?.filter((donation: { vendor: any; }) => donation.vendor === selectedVendor.value)
-    console.log(this.filteredDonations)
   }
 
   onProgramSelect = (event: any) => {
     let selectedProgram = event;
-    console.log(selectedProgram)
     this.filteredDonations = this.allDonations?.filter((donation: { program: any; }) => donation.program === selectedProgram.value)
-    console.log(selectedProgram)
   }
 
   onDonationNameSelect = (event: any) => {
     let selectedDonation = event.value;
     this.quantity = selectedDonation.quantity
     this.isDonationSelected = true;
-    console.log(selectedDonation)
   }
 
   validateDonation = (): boolean => {
