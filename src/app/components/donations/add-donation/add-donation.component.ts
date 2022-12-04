@@ -9,9 +9,9 @@ import diaperProgram from 'src/app/repositories/diaperProgram.repository';
 import { FormControl, FormGroup } from '@angular/forms';
 import { VendorsvcService } from 'src/app/services/vendorsvc.service';
 import Vendor from 'src/app/models/vendor.model';
-import Donation from 'src/app/models/donation.model';
+import Donation, {EMPTY_DONATION} from 'src/app/models/donation.model';
 import { DonationService } from 'src/app/services/donation.service';
-import { combineLatest, startWith, tap } from 'rxjs';
+import {combineLatest, filter, startWith, tap} from 'rxjs';
 
 
 @Component({
@@ -30,24 +30,39 @@ export class AddDonationComponent implements OnInit {
     this.vendors = await this.vendorSvs.GetVendors();
     this.allDonations = await this.donationService.GetDonations();
     this.filteredDonations = this.allDonations;
+    console.log('all donations:::', this.allDonations)
 
     let _programControl = this.addDonationForm.controls.program
     let _vendorControl = this.addDonationForm.controls.vendor
 
-    let programChanges$ = _programControl.valueChanges
-    let vendorChanges$ = _vendorControl.valueChanges
+    let programChanges$ = _programControl.valueChanges.pipe(startWith(''))
+    let vendorChanges$ = _vendorControl.valueChanges.pipe(startWith(''))
 
-    combineLatest([programChanges$, vendorChanges$]).pipe(
+    combineLatest([
+      programChanges$,
+      vendorChanges$,
+    ]).pipe(
+      filter(([programName, vendorName]) => {
+        return !!(programName && vendorName);
+      }),
       tap(([programName, vendorName]) => {
-        this.filteredDonations = this.allDonations?.filter(don => don.vendor === vendorName);
-        this.filteredDonations = this.filteredDonations?.filter(don => don.program === programName)
-        console.log(this.filteredDonations)
+        this.filteredDonations = this.allDonations?.filter(don => don.vendor === vendorName && don.program == programName);
+        if (this.filteredDonations.length == 0)
+          this.donationControl().setValue(EMPTY_DONATION)
       })
     ).subscribe()
   }
 
+  donationControl = () => {
+    return this.addDonationForm.controls.donation
+  }
+
+  shouldShow = () => {
+    return !!(this.addDonationForm.controls.donation.value?.id)
+  }
+
   addDonationForm = new FormGroup({
-    donation: new FormControl(),
+    donation: new FormControl(EMPTY_DONATION),
     vendor: new FormControl(''),
     program: new FormControl(''),
     quantity: new FormControl(''),
@@ -55,8 +70,8 @@ export class AddDonationComponent implements OnInit {
 
   public name?: string;
   public vendors?: any
-  public allDonations?: any[]
-  public filteredDonations?: Array<Donation> = []
+  public allDonations: any[] = []
+  public filteredDonations: Array<Donation> = []
   public vendor?: string;
   public program?: SAFEProgram;
   public quantity?: number;
@@ -86,7 +101,7 @@ export class AddDonationComponent implements OnInit {
 
   async onSubmitAddDonation() {
 
-    let foundDonation = this.allDonations?.find(donation => donation.name === this.addDonationForm.value.donation!.name) //await this.donationService.GetDonations().then(res => res.find(donation => donation['name'] === this.addDonationForm.value.donation))
+    let foundDonation = this.allDonations.find(donation => donation.name === this.addDonationForm.value.donation!.name) //await this.donationService.GetDonations().then(res => res.find(donation => donation['name'] === this.addDonationForm.value.donation))
 
     if (foundDonation) {
       let newQuantity = Number.parseInt(foundDonation.quantity.toString()) + Number.parseInt(this.addDonationForm.value.quantity!.toString());
