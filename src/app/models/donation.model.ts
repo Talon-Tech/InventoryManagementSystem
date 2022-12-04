@@ -8,3 +8,12 @@ export default interface Donation {
     quantity: number;
     donationDate?: string
 }
+
+export const EMPTY_DONATION: Donation = {
+  id: "",
+  donationDate: "",
+  name: '',
+  program: "Diaper Program",
+  quantity: 0,
+  vendor: ''
+}

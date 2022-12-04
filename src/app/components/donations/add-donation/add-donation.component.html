@@ -19,13 +19,13 @@
             <mat-select #donationSelect (selectionChange)="onDonationNameSelect($event)" formControlName="donation"
                 placeholder="Select a Donantion">
                 <mat-option *ngFor="let donationItem of filteredDonations" [value]="donationItem">
-                    {{donationItem.name}}</mat-option>
+                    {{donationItem?.name }}</mat-option>
             </mat-select>
         </mat-form-field>
-        <mat-form-field *ngIf="isDonationSelected">
-            <input [value]="quantity" matInput readonly placeholder="Current Donation Quantity">
+        <mat-form-field *ngIf="shouldShow()">
+            <input [value]="quantity?.toString()" matInput readonly placeholder="Current Donation Quantity">
         </mat-form-field>
-        <mat-form-field *ngIf="isDonationSelected">
+        <mat-form-field *ngIf="shouldShow()">
             <input type="number" min="0" formControlName="quantity" matInput placeholder="Amount to Add">
         </mat-form-field>
         <button *ngIf="isDonationSelected" type="submit">Add</button>
