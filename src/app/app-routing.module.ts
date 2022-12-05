@@ -9,6 +9,7 @@ import { ViewVendorsComponent } from './components/view-vendors/view-vendors.com
 import { AuthGService } from './services/auth-g.service';
 import { EditVendorComponent } from './components/edit-vendor/edit-vendor.component';
 import { RemoveDonationsComponent } from './components/donations/remove-donations/remove-donations/remove-donations.component';
+import { CreateDonationComponent } from './components/donations/create-donation/create-donation/create-donation.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,10 @@ const routes: Routes = [
     path: 'add-donation',
     component: AddDonationComponent,
     //canActivate:[AuthGService]
+  },
+  {
+    path: 'create-donation',
+    component: CreateDonationComponent
   },
   {
     path: 'remove-donation',

@@ -20,17 +20,17 @@ export class DonationService {
     const querySnapshot = await getDocs(this.donationCollection);
 
     querySnapshot.forEach((doc) => {
-      donations.push(doc.data());
+      donations.push(doc.data() as Donation);
     });
 
-    return donations;
+    return donations as Donation[];
   }
 
-  async GetDonation(id: any) {
+  async GetDonation(id: any): Promise<DocumentData | undefined> {
     const docRef = doc(this.dbRef, "donations", id);
     const docSnap = await getDoc(docRef);
 
-    return docSnap.data();
+    return docSnap.data() as Donation;
   }
 
   async AddDonation(donation: Donation) {

@@ -30,7 +30,6 @@ export class AddDonationComponent implements OnInit {
     this.vendors = await this.vendorSvs.GetVendors();
     this.allDonations = await this.donationService.GetDonations();
     this.filteredDonations = this.allDonations;
-    console.log('all donations:::', this.allDonations)
 
     let _programControl = this.addDonationForm.controls.program
     let _vendorControl = this.addDonationForm.controls.vendor
@@ -132,10 +131,6 @@ export class AddDonationComponent implements OnInit {
     this.addDonationForm.reset()
 
     await this.donationService.AddDonation(newDonationToAdd);
-
-    // this.quantity = newDonationToAdd.quantity;
-
-    // window.alert(`You added ${this.addDonationForm.value.quantity} to ${this.addDonationForm.value.donation?.name}'s inventory`);
 
     return;
   }
