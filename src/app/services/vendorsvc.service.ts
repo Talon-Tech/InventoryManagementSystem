@@ -18,10 +18,12 @@ import {
   onSnapshot
 } from 'firebase/firestore';
 
-// Imports 
+// Imports
 import Vendor from 'src/app/models/vendor.model';
 import vendorArr from 'src/app/repositories/vendor.repository';
 import { DbService } from 'src/app/services/db.service';
+import firebase from "firebase/compat";
+import QuerySnapshot = firebase.firestore.QuerySnapshot;
 
 @Injectable({
   providedIn: 'root'
@@ -42,12 +44,15 @@ export class VendorsvcService {
     return vendors;
   }
 
+  /**
+   * now unused - refer to previous
+   */
   async getVendorsObs() {
     let vendors: DocumentData[] = [];
 
     const q = query(collection(this.dbRef, "vendors"));
     const unsubscribe = onSnapshot(q, (snapshot) => {
-      // vendors = []; 
+      // vendors = [];
       snapshot.docChanges().forEach((change) => {
         if (change.type === "added") {
           // console.log("New city: ", change.doc.data());
@@ -66,21 +71,21 @@ export class VendorsvcService {
     });
 
     // const q = query(collection(this.dbRef, "vendors"));
-    // // vendors = []; 
+    // // vendors = [];
     // const unsubscribe = onSnapshot(q, (querySnapshot) => {
     //   let temp: any[] = [];
-    //   // vendors = []; 
+    //   // vendors = [];
     //   querySnapshot.forEach((doc) => {
-    //     // vendors = []; 
+    //     // vendors = [];
     //     temp.push({...doc.data()});
-    //     // console.log(temp); 
+    //     // console.log(temp);
     //   });
-    //   console.log(temp); 
-    //   vendors = temp; 
+    //   console.log(temp);
+    //   vendors = temp;
     // });
 
     // console.log(vendors);
-    // return querySnapshot.docs; 
+    // return querySnapshot.docs;
     return vendors;
   }
 
