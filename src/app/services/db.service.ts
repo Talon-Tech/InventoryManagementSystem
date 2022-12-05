@@ -3,7 +3,7 @@ import { environment } from 'src/environments/environment';
 
 // Import the functions you need from the firebase SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore } from 'firebase/firestore/lite';
+import { getFirestore } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root'
