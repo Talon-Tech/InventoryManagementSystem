@@ -1,0 +1,33 @@
+<mat-card>
+    <p>Remove a Donation</p>
+    <form [formGroup]="addDonationForm" (ngSubmit)="onSubmitAddDonation()">
+        <mat-form-field>
+            <mat-select (selectionChange)="onProgramSelect($event)" formControlName="program"
+                placeholder="Select a Program">
+                <mat-option *ngFor="let programItem of programs" [value]="programItem">{{programItem}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select (selectionChange)="onVendorSelect($event)" formControlName="vendor"
+                placeholder="Select a Vendor">
+                <mat-option *ngFor="let vendorItem of vendors" [value]="vendorItem.name">{{vendorItem.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select #donationSelect (selectionChange)="onDonationNameSelect($event)" formControlName="donation"
+                placeholder="Select a Donantion">
+                <mat-option *ngFor="let donationItem of filteredDonations" [value]="donationItem">
+                    {{donationItem?.name }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field *ngIf="shouldShow()">
+            <input [value]="quantity?.toString()" matInput readonly placeholder="Current Donation Quantity">
+        </mat-form-field>
+        <mat-form-field *ngIf="shouldShow()">
+            <input type="number" min="0" [max]="quantity!.toString()" formControlName="quantity" matInput placeholder="Amount to Remove">
+        </mat-form-field>
+        <button *ngIf="isDonationSelected" type="submit">Remove</button>
+    </form>
+</mat-card>

@@ -29,12 +29,12 @@ export class CreateDonationComponent implements OnInit {
   });
 
   constructor(private formBuilder: FormBuilder, private vendorSvc: VendorsvcService, private donationService: DonationService) {
-    this.programs = SAFEProgramsReadable;
   }
 
   async ngOnInit(): Promise<void> {
     let vendorCollection = await this.vendorSvc.GetVendors();
     this.vendors = vendorCollection;
+    this.programs = SAFEProgramsReadable;
   }
 
   // initializeForm(): void {
@@ -45,6 +45,16 @@ export class CreateDonationComponent implements OnInit {
   //     quantity: 0
   //   })
   // }
+
+  onVendorSelect = (event: any) => {
+    let selectedVendor = event.value;
+    this.validationForm.value.vendor = selectedVendor;
+  }
+
+  onProgramSelect = (event: any) => {
+    let selectedProgram = event.value;
+    this.validationForm.value.program = selectedProgram
+  }
 
   onDonationNameChange = (event: any) => {
     let selectedDonation = event.target.value;

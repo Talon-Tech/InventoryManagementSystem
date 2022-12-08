@@ -26,7 +26,7 @@ import { Example } from './components/donations/view-donation/view-donation.comp
 import { AddVendorComponent } from './components/add-vendor/add-vendor.component';
 import { ViewVendorsComponent } from './components/view-vendors/view-vendors.component';
 import { EditVendorComponent } from './components/edit-vendor/edit-vendor.component';
-import { RemoveDonationsComponent } from './components/donations/remove-donations/remove-donations/remove-donations.component';
+import { RemoveDonationComponent } from './components/donations/remove-donations/remove-donations/remove-donations.component.ts';
 import { MatListModule } from '@angular/material/list';
 import { ToolBarWSideNavComponent } from './components/tool-bar-w-side-nav/tool-bar-w-side-nav.component';
 import { CreateDonationComponent } from './components/donations/create-donation/create-donation/create-donation.component';
@@ -39,7 +39,7 @@ import { CreateDonationComponent } from './components/donations/create-donation/
     Example,
     AddVendorComponent,
     ViewVendorsComponent,
-    RemoveDonationsComponent,
+    RemoveDonationComponent,
     ToolBarWSideNavComponent,
     EditVendorComponent,
     CreateDonationComponent

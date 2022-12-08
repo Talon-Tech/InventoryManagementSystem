@@ -47,6 +47,9 @@ export class DonationService {
   );
   await updateDoc(docRef, {
     id: docRef.id,
+  }).then(() => {
+    window.alert(`Donation successful! There ${donation.quantity > 1 ? "are" : "is"} now ${donation.quantity} ${donation.name} in inventory.`);
+          window.location.reload()
   });
   }
 
