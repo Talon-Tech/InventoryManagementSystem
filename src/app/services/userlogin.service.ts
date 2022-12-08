@@ -11,6 +11,7 @@ import { DbService } from './db.service';
 export class UserloginService {
 
 dbRef = this.dbSvc.getDb();
+loggedIn:boolean = false;
 
 constructor(private router: Router, private dbSvc: DbService){}
 
@@ -48,10 +49,15 @@ constructor(private router: Router, private dbSvc: DbService){}
     })
 
     if (users.length === 1) {
-      return true;
+      this.loggedIn = true;
     }
 
-    return false;
+    else {
+      this.loggedIn = false;
+    }
+
+    this.userLoggedIn.emit(this.loggedIn);
+    return this.loggedIn;
   }
 
   GetCurrentUser()
@@ -61,8 +67,8 @@ constructor(private router: Router, private dbSvc: DbService){}
 
   LogoutUser()
   {
-    this.currentUser=undefined;
-    this.userLoggedIn.emit(false);
+    this.loggedIn=false;
+    this.userLoggedIn.emit(this.loggedIn);
   }
 
 }

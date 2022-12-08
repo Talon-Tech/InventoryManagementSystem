@@ -15,6 +15,8 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
 
+  loggedIn:boolean = false;
+
   constructor(private newLogin:UserloginService, private router: Router){
   }
   
@@ -30,16 +32,10 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.currentUser=this.newLogin.GetCurrentUser();
 
-    this.newLogin.userLoggedIn.subscribe((data)=>{
-      if(data)
-      {
-        this.currentUser=this.newLogin.GetCurrentUser();
-      }
-      else
-      {
-        this.currentUser=undefined;
-        this.router.navigate(['/']);
-      }
+    this.newLogin.userLoggedIn.subscribe((loggedIn)=>{
+      console.log("EventEmitterValue:", loggedIn);
+      this.loggedIn = loggedIn;
+      
     });
   }
 

@@ -1,8 +1,8 @@
 
 <mat-toolbar>
   <span>Inventory Management System</span>
-  <button *ngIf="!currentUser" [routerLink]="['/login']" mat-button>Login</button>
-  <button *ngIf="currentUser" [routerLink]="['/login']" mat-button (click)="LogoutUser()">Logout</button>
+  <button *ngIf="!loggedIn" [routerLink]="['/login']" mat-button>Login</button>
+  <button *ngIf="loggedIn" [routerLink]="['/login']" mat-button (click)="LogoutUser()">Logout</button>
   <button routerLink="/add-donation" mat-button>Add Donation</button>
   <button routerLink="/remove-donation" mat-button>Remove Donation</button>
   <button routerLink="/view-donations" mat-button>Donations Dashboard</button>

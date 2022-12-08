@@ -11,22 +11,22 @@ import { UserloginService } from 'src/app/services/userlogin.service';
 export class LoginComponent implements OnInit {
 
   constructor(private router:Router, private userlogin: UserloginService){ }
-  username='';
+  email='';
   password='';
   errorOccured=false;
 
   ngOnInit(): void {
   }
 
-  Login(){
-    let result =this.userlogin.Login(this.username,this.password);
+  async LoginTest(){
+    let result = await this.userlogin.LoginTest(this.email);
     if(result)
     {
         this.router.navigate(['/add-donation']);
     }
     else
     {
-      this.errorOccured=true;
+        this.errorOccured=true;
     }
   }
 }
