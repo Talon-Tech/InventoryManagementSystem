@@ -51,7 +51,8 @@ export class ViewVendorsComponent implements AfterViewInit, OnInit {
 
     onSnapshot(q, (snapshot) => {
       // pulls the value of the docs property and assigns it into a new variable called docs
-      const { docs } = snapshot
+      // object destructuring ES-6
+      const { docs } = snapshot;
 
       /**
        * we enforce the type of Vendor from the data given back from `.data()`
