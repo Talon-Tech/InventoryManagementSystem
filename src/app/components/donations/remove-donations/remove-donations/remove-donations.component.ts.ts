@@ -15,11 +15,11 @@ import {combineLatest, filter, startWith, tap} from 'rxjs';
 
 
 @Component({
-  selector: 'app-add-donation',
-  templateUrl: './add-donation.component.html',
-  styleUrls: ['../donations.scss']
+  selector: 'app-remove-donation',
+  templateUrl: './remove-donation.component.html',
+  styleUrls: ['../../donations.scss']
 })
-export class AddDonationComponent implements OnInit {
+export class RemoveDonationComponent implements OnInit {
 
   constructor(
     private vendorSvs: VendorsvcService,
@@ -103,7 +103,7 @@ export class AddDonationComponent implements OnInit {
     let foundDonation = this.allDonations.find(donation => donation.name === this.addDonationForm.value.donation!.name) //await this.donationService.GetDonations().then(res => res.find(donation => donation['name'] === this.addDonationForm.value.donation))
 
     if (foundDonation) {
-      let newQuantity = Number.parseInt(foundDonation.quantity.toString()) + Number.parseInt(this.addDonationForm.value.quantity!.toString());
+      let newQuantity = Number.parseInt(foundDonation.quantity.toString()) - Number.parseInt(this.addDonationForm.value.quantity!.toString());
 
       let updatedDonation = {
         id: foundDonation.id,
@@ -119,7 +119,7 @@ export class AddDonationComponent implements OnInit {
       return;
     }
 
-    let newDonationToAdd = {
+    let newDonationToRemove = {
       id: uuidv4(),
       name: this.addDonationForm.value.donation!.name,
       quantity: this.addDonationForm.value.donation!.quantity,
@@ -130,7 +130,7 @@ export class AddDonationComponent implements OnInit {
 
     this.addDonationForm.reset()
 
-    await this.donationService.AddDonation(newDonationToAdd);
+    await this.donationService.AddDonation(newDonationToRemove);
 
     return;
   }

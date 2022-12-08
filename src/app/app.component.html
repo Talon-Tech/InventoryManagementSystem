@@ -4,6 +4,7 @@
   <button *ngIf="!currentUser" [routerLink]="['/login']" mat-button>Login</button>
   <button *ngIf="currentUser" [routerLink]="['/login']" mat-button (click)="LogoutUser()">Logout</button>
   <button routerLink="/add-donation" mat-button>Add Donation</button>
+  <button routerLink="/create-donation" mat-button>Create Donation</button>
   <button routerLink="/remove-donation" mat-button>Remove Donation</button>
   <button routerLink="/view-donations" mat-button>Donations Dashboard</button>
   <button routerLink="/new-vendor" mat-button>Add Vendor</button>
@@ -11,7 +12,7 @@
   <button routerLink="/tool-bar-w-side-nav" mat-button>Toobar</button>
 </mat-toolbar>
 <!-- <app-tool-bar-w-side-nav></app-tool-bar-w-side-nav> -->
-<div class="center">
+<div>
   
   <router-outlet></router-outlet>
 </div>

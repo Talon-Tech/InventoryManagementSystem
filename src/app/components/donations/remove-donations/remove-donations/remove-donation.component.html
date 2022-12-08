@@ -1,5 +1,5 @@
 <mat-card>
-    <p>Add a Donation</p>
+    <p>Remove a Donation</p>
     <form [formGroup]="addDonationForm" (ngSubmit)="onSubmitAddDonation()">
         <mat-form-field>
             <mat-select (selectionChange)="onProgramSelect($event)" formControlName="program"
@@ -26,8 +26,8 @@
             <input [value]="quantity?.toString()" matInput readonly placeholder="Current Donation Quantity">
         </mat-form-field>
         <mat-form-field *ngIf="shouldShow()">
-            <input type="number" min="0" formControlName="quantity" matInput placeholder="Amount to Add">
+            <input type="number" min="0" [max]="quantity!.toString()" formControlName="quantity" matInput placeholder="Amount to Remove">
         </mat-form-field>
-        <button *ngIf="isDonationSelected" type="submit">Add</button>
+        <button *ngIf="isDonationSelected" type="submit">Remove</button>
     </form>
 </mat-card>

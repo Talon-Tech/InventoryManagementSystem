@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
@@ -20,13 +22,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AddDonationComponent } from './components/donations/add-donation/add-donation.component';
 import { LoginComponent } from './components/login/login.component';
 import { FormsModule } from '@angular/forms';
-import { Example } from './components/view-donation/view-donation.component';
+import { Example } from './components/donations/view-donation/view-donation.component';
 import { AddVendorComponent } from './components/add-vendor/add-vendor.component';
 import { ViewVendorsComponent } from './components/view-vendors/view-vendors.component';
 import { EditVendorComponent } from './components/edit-vendor/edit-vendor.component';
-import { RemoveDonationsComponent } from './components/donations/remove-donations/remove-donations/remove-donations.component';
+import { RemoveDonationComponent } from './components/donations/remove-donations/remove-donations/remove-donations.component.ts';
 import { MatListModule } from '@angular/material/list';
 import { ToolBarWSideNavComponent } from './components/tool-bar-w-side-nav/tool-bar-w-side-nav.component';
+import { CreateDonationComponent } from './components/donations/create-donation/create-donation/create-donation.component';
 
 @NgModule({
   declarations: [
@@ -36,11 +39,13 @@ import { ToolBarWSideNavComponent } from './components/tool-bar-w-side-nav/tool-
     Example,
     AddVendorComponent,
     ViewVendorsComponent,
-    RemoveDonationsComponent,
+    RemoveDonationComponent,
     ToolBarWSideNavComponent,
-    EditVendorComponent
+    EditVendorComponent,
+    CreateDonationComponent
   ],
   exports: [
+    MatGridListModule,
     MatStepperModule,
     MatButtonModule,
     MatMenuModule,
@@ -54,9 +59,12 @@ import { ToolBarWSideNavComponent } from './components/tool-bar-w-side-nav/tool-
     MatSelectModule,
     MatInputModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+    MatPaginatorModule
   ],
   imports: [
+    MatGridListModule,
+    MatPaginatorModule,
     MatStepperModule,
     BrowserModule,
     AppRoutingModule,

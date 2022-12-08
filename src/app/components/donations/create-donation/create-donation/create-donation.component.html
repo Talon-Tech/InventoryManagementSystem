@@ -1,0 +1,25 @@
+<mat-card>
+    <p>
+        Create a Donation
+    </p>
+    <form  (ngSubmit)="onSubmitAddDonation()" [formGroup]="validationForm">
+        <mat-form-field>
+            <mat-select (selectionChange)="onVendorSelect($event)" formControlName="vendor" placeholder="Select Vendor">
+                <mat-option *ngFor="let vendorItem of vendors" [value]="vendorItem['name']">{{vendorItem['name']}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select (selectionChange)="onProgramSelect($event)" formControlName="program" placeholder="Select Program">
+                <mat-option *ngFor="let programItem of programs" [value]="programItem">{{programItem}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <input (change)="onDonationNameChange($event)" formControlName="name" matInput placeholder="Donation Name" required>
+        </mat-form-field>
+        <mat-form-field>
+            <input type="number" min="0" formControlName="quantity" matInput placeholder="Quantity" required>
+        </mat-form-field>
+        <button *ngIf="isDonationSelected" type="submit">Add</button>
+    </form>
+</mat-card>
