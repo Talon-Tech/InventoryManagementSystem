@@ -1,5 +1,12 @@
 <div class="container">
     <h1>All Vendors</h1>
+
+    <div class="demo-button-container">
+        <button mat-raised-button (click)="addVendor()" class="demo-button">
+            Add data
+        </button>
+    </div>
+
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
         <!-- ID -->

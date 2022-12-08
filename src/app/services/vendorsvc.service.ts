@@ -3,8 +3,20 @@ import { Router } from '@angular/router';
 import { Observable, Observer } from 'rxjs';
 
 // Import the functions you need from the firebase SDKs you need
-import { DocumentData, collection, doc, getDoc, getDocs, query, where, FieldPath } from 'firebase/firestore/lite';
-import { addDoc, updateDoc, deleteDoc } from 'firebase/firestore/lite';
+import {
+  DocumentData,
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  where,
+  FieldPath,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+  onSnapshot
+} from 'firebase/firestore';
 
 // Imports 
 import Vendor from 'src/app/models/vendor.model';
@@ -15,17 +27,16 @@ import { DbService } from 'src/app/services/db.service';
   providedIn: 'root'
 })
 export class VendorsvcService {
+  dbRef = this.dbSvc.getDb();
   vendorCollection = collection(this.dbSvc.getDb(), "vendors");
-  dbRef = this.dbSvc.getDb(); 
 
   constructor(private router: Router, private dbSvc: DbService) { }
 
   async GetVendors() {
     let vendors: DocumentData[] = [];
-    const querySnapshot = await getDocs(this.vendorCollection);
-
+    const querySnapshot = await getDocs(collection(this.dbRef, "vendors"));
     querySnapshot.forEach((doc) => {
-      vendors.push(doc.data());
+      vendors.push({ ...doc.data() });
     });
 
     return vendors;
@@ -40,27 +51,43 @@ export class VendorsvcService {
 
   async AddVendor(vendor: Vendor) {
     const docRef = await addDoc(this.vendorCollection,
-    {
-      // id: uuidv4(),
-      name: vendor.name,
-      contactFirst: vendor.contactFirst,
-      contactLast: vendor.contactLast,
-      contactPhone: vendor.contactPhone,
-    },
+      {
+        // id: uuidv4(),
+        name: vendor.name,
+        contactFirst: vendor.contactFirst,
+        contactLast: vendor.contactLast,
+        contactPhone: vendor.contactPhone,
+      },
 
-  );
-  await updateDoc(docRef, {
-    id: docRef.id,
-  });
+    );
+    await updateDoc(docRef, {
+      id: docRef.id,
+    });
+  }
+
+  async addVendorTest() {
+    const docRef = await addDoc(collection(this.dbRef, "vendors"),
+      {
+        // id: uuidv4(),
+        name: "test",
+        contactFirst: "test",
+        contactLast: "test",
+        contactPhone: "test",
+      },
+
+    );
+    await updateDoc(docRef, {
+      id: docRef.id,
+    });
   }
 
   async UpdateVendor(vendor: Vendor) {
     const vendorRef = doc(this.dbRef, "vendors", vendor.id);
     await updateDoc(vendorRef, {
-      name: vendor.name, 
+      name: vendor.name,
       contactFirst: vendor.contactFirst,
       contactLast: vendor.contactLast,
-      contactPhone: vendor.contactPhone, 
+      contactPhone: vendor.contactPhone,
     });
   }
 
