@@ -1,6 +1,6 @@
 import { EventEmitter, Injectable, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { addDoc, collection, updateDoc } from 'firebase/firestore';
+import {addDoc, collection, doc, getDocs, query, updateDoc, where} from 'firebase/firestore';
 import { Users } from '../models/users.model';
 import { DbService } from './db.service';
 
@@ -16,14 +16,8 @@ constructor(private router: Router, private dbSvc: DbService){}
 
   @Output() userLoggedIn = new EventEmitter<boolean>();
 
-    userArray:Users[]=[{
-    userId:'Matt',
-    email:'mzhang@web.com',
-    password:'1234',
-    fullName:'Matthew Zhang',
-    userType:"admin"
-  }]
-  
+    userArray:Users[]=[]
+
   currentUser:Users|undefined;
 
   Login(userId:string, pwd:string)
@@ -41,21 +35,23 @@ constructor(private router: Router, private dbSvc: DbService){}
     }
   }
 
-  async LoginTest() {
-    const docRef = await addDoc(collection(this.dbRef, "users"),
-      {
-        // id: uuidv4(),
-        userId:"test",
-        email:"test",
-        password:"test",
-        fullName:"test",
-        userType:"test"
-      },
+  async LoginTest(email: string) {
+    const q = query(collection(this.dbRef, "users"), where('email', '==', email))
 
-    );
-    await updateDoc(docRef, {
-      id: docRef.id,
-    });
+    const querySnapshot = await getDocs(q);
+
+    let users: Users[] = []
+
+    querySnapshot.forEach(doc => {
+      const user = doc.data() as Users;
+      users.push(user)
+    })
+
+    if (users.length === 1) {
+      return true;
+    }
+
+    return false;
   }
 
   GetCurrentUser()

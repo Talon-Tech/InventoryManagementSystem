@@ -1,5 +1,7 @@
 export interface Users {
-    userId:string;
-    password:string;
-    fullName:string;
+  userId:string;
+  email:string;
+  password:string;
+  fullName:string;
+  userType:"admin"|"standard";
 }
