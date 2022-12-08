@@ -1,9 +1,9 @@
-import {Component, AfterViewInit, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { query, collection, onSnapshot } from 'firebase/firestore';
 
+import Vendor from 'src/app/models/vendor.model';
 import { VendorsvcService } from 'src/app/services/vendorsvc.service';
 import { DbService } from 'src/app/services/db.service';
-import {collection, onSnapshot, query} from "firebase/firestore";
-import Vendor from "../../models/vendor.model";
 
 @Component({
   selector: 'app-view-vendors',
@@ -11,7 +11,7 @@ import Vendor from "../../models/vendor.model";
   styleUrls: ['./view-vendors.component.scss']
 })
 
-export class ViewVendorsComponent implements AfterViewInit, OnInit {
+export class ViewVendorsComponent implements OnInit {
   dbRef = this.dbSvc.getDb();
 
   displayedColumns: string[] = ['id', 'name', 'contactFirst', 'contactLast', 'contactPhone', 'editIcon', 'deleteIcon'];
@@ -70,19 +70,6 @@ export class ViewVendorsComponent implements AfterViewInit, OnInit {
     })
   }
 
-  async ngAfterViewInit() {
-    /**
-     * commented out previous `imperative` method of going and getting vendor data
-     * in favor of the 'reactive' set up done in the new `ngOnInit`
-     */
-    // let vendorCollection = await this.vendorSvc.GetVendors();
-    // this.dataSource = vendorCollection;
-
-    // let vendorCollection = await this.vendorSvc.getVendorsObs();
-    // this.dataSource = vendorCollection;
-
-    console.log(this.dataSource);
-  }
 
   async addVendor() {
     await this.vendorSvc.addVendorTest();
