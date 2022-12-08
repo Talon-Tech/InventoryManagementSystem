@@ -1,5 +1,7 @@
-export class Users {
-    userId:string='';
-    password:string='';
-    fullName:string='';
+export interface Users {
+  userId:string;
+  email:string;
+  password:string;
+  fullName:string;
+  userType:"admin"|"standard";
 }

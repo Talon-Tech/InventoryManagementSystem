@@ -1,5 +1,8 @@
 import { EventEmitter, Injectable, Output } from '@angular/core';
+import { Router } from '@angular/router';
+import {addDoc, collection, doc, getDocs, query, updateDoc, where} from 'firebase/firestore';
 import { Users } from '../models/users.model';
+import { DbService } from './db.service';
 
 @Injectable({
   providedIn: 'root'
@@ -7,14 +10,15 @@ import { Users } from '../models/users.model';
 
 export class UserloginService {
 
+dbRef = this.dbSvc.getDb();
+loggedIn:boolean = false;
+
+constructor(private router: Router, private dbSvc: DbService){}
+
   @Output() userLoggedIn = new EventEmitter<boolean>();
 
-  userArray:Users[]=[{
-    userId:'Matt',
-    password:'1234',
-    fullName:'Matthew Zhang'
-  }];
-  
+    userArray:Users[]=[]
+
   currentUser:Users|undefined;
 
   Login(userId:string, pwd:string)
@@ -32,6 +36,30 @@ export class UserloginService {
     }
   }
 
+  async LoginTest(email: string) {
+    const q = query(collection(this.dbRef, "users"), where('email', '==', email))
+
+    const querySnapshot = await getDocs(q);
+
+    let users: Users[] = []
+
+    querySnapshot.forEach(doc => {
+      const user = doc.data() as Users;
+      users.push(user)
+    })
+
+    if (users.length === 1) {
+      this.loggedIn = true;
+    }
+
+    else {
+      this.loggedIn = false;
+    }
+
+    this.userLoggedIn.emit(this.loggedIn);
+    return this.loggedIn;
+  }
+
   GetCurrentUser()
   {
     return this.currentUser;
@@ -39,8 +67,8 @@ export class UserloginService {
 
   LogoutUser()
   {
-    this.currentUser=undefined;
-    this.userLoggedIn.emit(false);
+    this.loggedIn=false;
+    this.userLoggedIn.emit(this.loggedIn);
   }
 
 }
