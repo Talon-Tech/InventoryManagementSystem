@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import donationRepository from '../repositories/donation.repository';
-import { DocumentData, collection, doc, getDoc, getDocs, query, where, FieldPath } from 'firebase/firestore/lite';
-import { addDoc, updateDoc, deleteDoc } from 'firebase/firestore/lite';
+import { DocumentData, collection, doc, getDoc, getDocs, query, where, FieldPath } from 'firebase/firestore';
+import { addDoc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { DbService } from 'src/app/services/db.service';
 import Donation from '../models/donation.model';
 import { v4 as uuidv4 } from 'uuid';
