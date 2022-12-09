@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment.prod';
 
 // Import the functions you need from the firebase SDKs you need
 import { initializeApp } from "firebase/app";
